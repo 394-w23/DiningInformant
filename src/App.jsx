@@ -6,9 +6,7 @@ import { HomePage } from './HomePage';
 const App = () => {
   const [count, setCount] = useState(0);
 
-  return (
-    <HomePage />
-  );
+  return <HomePage />;
 };
 
 export default App;

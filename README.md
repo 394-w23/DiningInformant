@@ -28,20 +28,19 @@ Verify that the unit tests work with
 npm test
 ```
 
-Two tests should run and pass. 
+Two tests should run and pass.
 
 ## Scripts
 
 **package.json** defines the following scripts:
 
-| Script         | Description                                         |
-| -------------- | --------------------------------------------------- |
-| npm start      | Runs the app in the development mode.               |
-| npm run dev    | Runs the app in the development mode.               |
-| npm run build  | Builds the app for production to the `dist` folder. |
-| npm run serve  | Serves the production build from the `dist` folder. |
-| npm test       | Starts a Jest-like test loop                        |
-
+| Script        | Description                                         |
+| ------------- | --------------------------------------------------- |
+| npm start     | Runs the app in the development mode.               |
+| npm run dev   | Runs the app in the development mode.               |
+| npm run build | Builds the app for production to the `dist` folder. |
+| npm run serve | Serves the production build from the `dist` folder. |
+| npm test      | Starts a Jest-like test loop                        |
 
 ## Git
 
@@ -78,7 +77,6 @@ Expanded to include Vitest and some sample tests.
 Thanks to Rich Harris for [degit](https://www.npmjs.com/package/degit).
 
 Gitignore file created with [the Toptal tool](https://www.toptal.com/developers/gitignore/api/react,firebase,visualstudiocode,macos,windows).
-
 
 ## License
 

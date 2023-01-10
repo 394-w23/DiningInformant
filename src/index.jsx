@@ -6,11 +6,11 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDrtj71l3VbmET1bKGtekAsifVzRlUmgHU",
-  authDomain: "dininginformate.firebaseapp.com",
-  databaseURL: "https://dininginformate.firebaseio.com",
-  projectId: "dininginformate",
-  storageBucket: "dininginformate.appspot.com",
+  apiKey: 'AIzaSyDrtj71l3VbmET1bKGtekAsifVzRlUmgHU',
+  authDomain: 'dininginformate.firebaseapp.com',
+  databaseURL: 'https://dininginformate.firebaseio.com',
+  projectId: 'dininginformate',
+  storageBucket: 'dininginformate.appspot.com'
   // messagingSenderId: "sender-id",
   // appID: "app-id",
 };
@@ -23,11 +23,10 @@ export async function getWaitTimes() {
   const waitTimes = collection(db, 'Waiting Times');
   const waitSnapshot = await getDocs(waitTimes);
   // console.log({waitSnapshot})
-  const waitList = waitSnapshot.docs.map(doc => doc.data());
+  const waitList = waitSnapshot.docs.map((doc) => doc.data());
   // console.log({waitList})
   return waitList;
 }
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
