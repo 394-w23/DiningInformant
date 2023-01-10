@@ -17,29 +17,28 @@ export const HomePage = () => {
         console.log(e);
       });
 
-      getDiningHallInfo()
+    getDiningHallInfo()
       .then((data) => {
         setDiningHalls(data);
       })
       .catch((e) => {
         console.log(e);
       });
-    
   }, []);
   console.log(waitTimes);
   // Right now we don't use waitTimes, instead we use a default wait time stored in diningHall
 
   const cards = diningHalls.map((diningHall) => {
     return (
-      <DiningCard 
-        waitTime={diningHall['Wait Time']} 
-        diningHallId={diningHall['Dining Hall Id']} 
-        featuredItems={diningHall['Featured Items']} 
-        stars={diningHall['Stars']} 
+      <DiningCard
+        key={diningHall['Dining Hall Id']}
+        waitTime={diningHall['Wait Time']}
+        diningHallId={diningHall['Dining Hall Id']}
+        featuredItems={diningHall['Featured Items']}
+        stars={diningHall['Stars']}
         imageLink={diningHall['Image Link']}
       />
-    )
-  })
-  return (cards)
-  
+    );
+  });
+  return cards;
 };
