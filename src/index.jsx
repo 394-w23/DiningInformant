@@ -36,7 +36,6 @@ export async function getDiningHallInfo() {
   // console.log({diningList})
   return diningList;
 }
-await getDiningHallInfo()
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
