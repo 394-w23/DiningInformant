@@ -28,6 +28,15 @@ export async function getWaitTimes() {
   return waitList;
 }
 
+export async function getDiningHallInfo() {
+  const diningData = collection(db, 'Dining Halls');
+  const diningSnapshot = await getDocs(diningData);
+  // console.log({waitSnapshot})
+  const diningList = diningSnapshot.docs.map((doc) => doc.data());
+  // console.log({diningList})
+  return diningList;
+}
+await getDiningHallInfo()
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
