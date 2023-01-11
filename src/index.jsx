@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs, Timestamp, addDoc } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDrtj71l3VbmET1bKGtekAsifVzRlUmgHU',
@@ -36,6 +36,21 @@ export async function getDiningHallInfo() {
   // console.log({diningList})
   return diningList;
 }
+
+export async function submitForm(diningHallId, waitTime) {
+  try {
+  const docRef = await addDoc(collection(db, "Waiting Times"), {
+      "Dining Hall Id": diningHallId,
+      "Wait Time": waitTime,
+      "Timestamp": Timestamp.now()
+  });
+  console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+  console.error("Error adding document: ", e);
+  }
+  return 0;
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
