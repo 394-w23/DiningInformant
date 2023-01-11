@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs, Timestamp, addDoc } from 'firebase/firestore/lite';
+import { getFirestore, collection, getDocs, Timestamp, addDoc, orderBy, query} from 'firebase/firestore/lite';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDrtj71l3VbmET1bKGtekAsifVzRlUmgHU',
@@ -21,10 +21,10 @@ const db = getFirestore(app);
 // console.log(db);
 export async function getWaitTimes() {
   const waitTimes = collection(db, 'Waiting Times');
-  const waitSnapshot = await getDocs(waitTimes);
+  const waitQuery = await query(waitTimes, orderBy('Timestamp', 'asc'));
+  const waitSnapshot = await getDocs(waitQuery);
   // console.log({waitSnapshot})
   const waitList = waitSnapshot.docs.map((doc) => doc.data());
-  // console.log({waitList})
   return waitList;
 }
 
