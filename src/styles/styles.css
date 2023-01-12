@@ -1,0 +1,16 @@
+body {
+  background-color: rgb(233, 232, 231);
+  padding: 2%;
+  padding-top: 90px;
+  font-family: sans-serif;
+}
+
+section {
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+section * {
+  /* border: solid 1px #000; */
+  display: flex;
+}

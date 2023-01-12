@@ -1,0 +1,90 @@
+header {
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  background-color: white;
+  font-family: sans-serif;
+}
+
+header * {
+  display: flex;
+  height: 100%;
+}
+
+.newleft {
+  width: 75%;
+  padding-left: 2%;
+  font-family: 'Comfortaa', cursive;
+}
+
+.topright {
+  width: 100%;
+  padding-right: 2%;
+  justify-content: flex-end;
+  font-size: 65%;
+  padding-top: 1%;
+}
+
+.menu {
+  color: blue;
+  padding-left: 2%;
+  padding-top: 13px;
+  font-size: medium;
+}
+
+.mypic {
+  width: 9vh;
+  height: 8vh;
+  border-radius: 50%;
+}
+
+.recpic {
+  width: 6vh;
+  height: 5vh;
+  border-radius: 50%;
+}
+
+.recs {
+  position: fixed;
+  right: 1%;
+  padding: 1%;
+  height: 90%;
+  width: 32%;
+}
+
+.recheader {
+  width: 100%;
+  font-family: 'Comfortaa', cursive;
+}
+
+.suggestionsforyou {
+  font-weight: bolder;
+  color: rgb(88, 88, 88);
+  padding-bottom: 2%;
+}
+
+.toprec {
+  padding-top: 3%;
+}
+
+.midrec {
+  flex-direction: column;
+  height: 5vh;
+  width: 98%;
+}
+
+.recname {
+  font-weight: bolder;
+}
+
+.suggested {
+  font-size: 70%;
+  width: 100%;
+}
+
+.follow {
+  justify-content: flex-end;
+  color: blue;
+}
