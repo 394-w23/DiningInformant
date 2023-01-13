@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import {
   getFirestore,
@@ -6,17 +7,20 @@ import {
   Timestamp,
   addDoc,
   orderBy,
-  query
-} from 'firebase/firestore/lite';
+  query,
+  onSnapshot
+} from 'firebase/firestore';
+import { getLatestWaitTimeForHalls } from './helpers';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDrtj71l3VbmET1bKGtekAsifVzRlUmgHU',
   authDomain: 'dininginformate.firebaseapp.com',
-  databaseURL: 'https://dininginformate.firebaseio.com',
+  databaseURL: 'https://dininginformate-default-rtdb.firebaseio.com',
   projectId: 'dininginformate',
-  storageBucket: 'dininginformate.appspot.com'
-  // messagingSenderId: "sender-id",
-  // appID: "app-id",
+  storageBucket: 'dininginformate.appspot.com',
+  messagingSenderId: '1060468020333',
+  appId: '1:1060468020333:web:c01879a1caf592d703db64',
+  measurementId: 'G-J40KDS27KG'
 };
 
 const app = initializeApp(firebaseConfig);
@@ -41,6 +45,12 @@ export async function getDiningHallInfo() {
   return diningList;
 }
 
+export const streamWaitTimes = (snapshot, error) => {
+  const itemsColRef = collection(db, 'Waiting Times');
+  const waitQuery = query(itemsColRef, orderBy('Timestamp', 'asc'));
+  return onSnapshot(waitQuery, snapshot, error);
+};
+
 export async function submitForm(diningHallId, waitTime) {
   try {
     const docRef = await addDoc(collection(db, 'Waiting Times'), {
@@ -54,3 +64,22 @@ export async function submitForm(diningHallId, waitTime) {
   }
   return 0;
 }
+
+export const useDbData = () => {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = streamWaitTimes(
+      (querySnapshot) => {
+        const updatedWaitTimes = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+        const latestWaitTimes = getLatestWaitTimeForHalls(updatedWaitTimes);
+        setData(latestWaitTimes);
+      },
+      () => setError('Failed to get wait times')
+    );
+    return unsubscribe;
+  }, []);
+
+  return [data, error];
+};
