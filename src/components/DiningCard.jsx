@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import './styles.css';
+import React from 'react';
 
 export const DiningCard = (props) => {
   const { waitTime, diningHallId, featuredItems, stars, imageLink } = props;
 
   let color;
   if (waitTime < 10) {
-    color = '#79DE79'
+    color = '#79DE79';
   } else if (waitTime < 20) {
-    color = '#FCFC99'
+    color = '#FCFC99';
   } else {
-    color = '#FB6962'
+    color = '#FB6962';
   }
- 
+
   return (
     <section className="cards">
       <div className="hall">
@@ -34,8 +33,11 @@ export const DiningCard = (props) => {
         </div>
         <div className="middleright">
           <div className="waittime">
-            <div className="waitlabel" style={{backgroundColor: color}}>
-              <p >{`${waitTime} `}<span>min</span></p>
+            <div className="waitlabel" style={{ backgroundColor: color }}>
+              <p>
+                {`${waitTime} `}
+                <span>min</span>
+              </p>
             </div>
 
             <div className="waitscore">
