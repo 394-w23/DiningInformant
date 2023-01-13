@@ -53,9 +53,9 @@ export const HomePage = () => {
             <div className="sortby">
               <h1>sortby</h1>
             </div>
-            <div className="menu">
+            {/* <div className="menu">
               <a href="#"> ...</a>
-            </div>
+            </div> */}
           </div>
         </section>
       </header>
