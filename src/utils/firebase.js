@@ -73,7 +73,8 @@ export const useDbData = () => {
     const unsubscribe = streamWaitTimes(
       (querySnapshot) => {
         const updatedWaitTimes = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
-        setData(getLatestWaitTimeForHalls(updatedWaitTimes));
+        const latestWaitTimes = getLatestWaitTimeForHalls(updatedWaitTimes);
+        setData(latestWaitTimes);
       },
       () => setError('Failed to get wait times')
     );
