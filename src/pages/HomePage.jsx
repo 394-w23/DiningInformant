@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DiningCard } from '../components/DiningCard';
 import { Form } from '../components/Form';
-import { getWaitTimes } from '../utils/firebase';
+import { getWaitTimes, streamWaitTimes, useDbData } from '../utils/firebase';
 import { getLatestWaitTimeForHalls } from '../utils/helpers';
 
 const imageDict = {
@@ -16,18 +16,7 @@ const imageDict = {
 };
 
 export const HomePage = () => {
-  const [waitTimes, setWaitTimes] = useState([]);
-
-  useEffect(() => {
-    getWaitTimes()
-      .then((data) => {
-        const latestWaitTimes = getLatestWaitTimeForHalls(data);
-        setWaitTimes(latestWaitTimes);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
+  const [waitTimes, error] = useDbData();
 
   const cards = waitTimes.map((diningHall) => {
     return (
