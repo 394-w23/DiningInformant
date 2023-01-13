@@ -1,4 +1,5 @@
 import React from 'react';
+import Rating from '@mui/material/Rating';
 
 export const DiningCard = (props) => {
   const { waitTime, diningHallId, featuredItems, stars, imageLink } = props;
@@ -17,8 +18,8 @@ export const DiningCard = (props) => {
       <div className="hall">
         <img className="hallpic" src={imageLink} alt={`Picture of ${diningHallId}`} />
         <div className="hallname">
-            <h2>{diningHallId}</h2>
-          </div>
+          <h2>{diningHallId}</h2>
+        </div>
       </div>
       <div className="middle">
         <div className="middleleft">
@@ -34,26 +35,28 @@ export const DiningCard = (props) => {
             <div className="item2">{featuredItems[1]}</div>
           </div>
           <div className="waitscore">
-              {/* Worth the Wait Score */}
-              <p>{stars}</p>
-            </div>
+            {/* Worth the Wait Score */}
+            <Rating name="half-rating-read" value={stars} precision={0.5} readOnly />
+            {/* <Rating name="read-only" value={stars} readOnly /> */}
+            {/* <p>{stars}</p> */}
+          </div>
         </div>
         <div className="middleright">
-          
-            <div className="waitlabel" style={{ backgroundColor: color }}>
+
+          <div className="waitlabel" style={{ backgroundColor: color }}>
             <div className="waittime">
               {/* <p>
                 {`${waitTime} `}
                 
               </p> */}
-                 {`${waitTime} `}
-              </div>
-              {/* <span>min</span> */}
-              min
+              {`${waitTime} `}
+            </div>
+            {/* <span>min</span> */}
+            min
 
-              </div>
-            <div className="more">More -</div>
-          
+          </div>
+          <div className="more">More -</div>
+
         </div>
       </div>
     </section>
