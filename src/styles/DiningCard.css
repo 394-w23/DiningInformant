@@ -3,6 +3,8 @@
   flex-direction: column;
   padding: 1%;
   background-color: white;
+   border-radius: 25px;
+
 }
 
 .cards * {
@@ -14,15 +16,33 @@
   flex-direction: column;
 }
 
+.hall {
+  /* height: 20%; */
+}
+
 .hallname {
-  padding-left: 3%;
+  
+  padding-bottom: 10%;
   width: 100%;
   font-family: 'Comfortaa', cursive;
+  position: absolute;
+  font-size: 100%;
+  padding-left: 3%;
+  font: bolder;
+
+  
 }
 
 .hallpic {
   width: 100%;
-  height: 60%;
+  height: 100px;
+  max-height: 100px; 
+  overflow: hidden;
+  border-radius: 25px;
+  padding-bottom: 1%;
+  position: relative;
+  filter: blur(3px);
+  /* filter: brightness(0) invert(1); */
 }
 
 .middle {
@@ -32,20 +52,28 @@
 .middleleft {
   flex-direction: column;
   padding-left: 3%;
-  width: 70%;
+  width: 65%;
 }
 
 .middleright {
+  flex-direction: column;
   justify-content: flex-end;
-  width: 30%;
+  width: 35%;
   padding-right: 3%;
+  padding-bottom: 5%;
 }
 
 .featuredlabel {
-  font-size: 65%;
+  font-size: 3vw;
   font-weight: bolder;
   background: #452c63;
+  /* padding: 2px; */
+  width: 60%;
+  border-radius: 25px;
   color: white;
+  padding-left: 3%;
+  padding-right: 3%;
+
 }
 
 .featureditems {
@@ -57,6 +85,8 @@
   padding-left: 3%;
   padding-right: 3%;
   font-weight: bolder;
+  font-size: 3vw;
+  /* border: black; */
 }
 
 .item2 {
@@ -64,13 +94,14 @@
   padding-left: 3%;
   padding-right: 3%;
   font-weight: bolder;
+  font-size: 3vw;
 }
 
 .waitlabel {
   font-size: 3vw;
   font-weight: bolder;
-  width: 10vw;
-  height: 10vw;
+  width: 65%;
+  height: 65%;
   border-radius: 50%;
   background: green;
   text-align: center;
@@ -78,8 +109,10 @@
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  align-items: top;
+  justify-content: top;
+  padding-top: 2%;
+ 
 
   /* background: radial-gradient(
     circle at center,
@@ -91,17 +124,26 @@
 }
 .waitlabel > p {
   margin: 0;
+  /* font-size: 3 ww; */
 }
 
 .waittime {
   flex-direction: column;
+  font-size: 10ww;
+  font-size: 8vw;
+  padding-top: 3%;
+
+  /* padding-bottom: 5%; */
 }
 
 .waitscore {
   padding-top: 1%;
+  padding-bottom: none;
   padding-left: 3%;
   padding-right: 3%;
   font-weight: bolder;
+  /* font-size: 3ww; */
+ 
 }
 
 .more {
