@@ -3,15 +3,19 @@ import Rating from '@mui/material/Rating';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { submitForm } from "../utils/firebase";
 
 export const Form = () => {
-    const dininghalls = [{ title: "Allison" }, { title: "Elder" }, { title: "Plex West" }, { title: "Sargent" }];
+    const dininghalls = ["Allison", "Elder", "Plex West", "Sargent"]
 
-    const [diningHall, setDiningHall] = useState(null);
-    const [waitTime, setWaitTime] = useState(null);
+    const [diningHall, setDiningHall] = useState(null)
+    const [waitTime, setWaitTime] = useState('');
+    const [stars, setStars] = useState(null);
 
-    console.log(diningHall)
-    console.log(waitTime)
+    const handleSubmit = () => {
+        submitForm(diningHall, waitTime);
+    }
+
 
     return (
         <div className="container-center-horizontal">
@@ -57,13 +61,13 @@ export const Form = () => {
                             onChange={(event, newValue) => { setDiningHall(newValue) }}
                             style={{ width: "320px" }}
                             options={dininghalls}
-                            getOptionLabel={(option) => option.title}
+                            getOptionLabel={(option) => option}
                             defaultValue={dininghalls[0]}
                             renderTags={(value, getTagProps) =>
                                 value.map((option, index) => (
                                     <Chip
                                         variant="outlined"
-                                        label={option.title}
+                                        label={option}
                                         size="small"
                                         {...getTagProps({ index })}
                                     />
@@ -73,8 +77,7 @@ export const Form = () => {
                                 <TextField
                                     {...params}
                                     variant="filled"
-                                    label="Size small"
-                                    placeholder="Favorites"
+                                    label="Dining Hall"
                                 />
                             )}
                         />
@@ -85,18 +88,24 @@ export const Form = () => {
                             
                             <input type="number" min="0" max="40"></input>
                         </div> */}
-                        <TextField value={waitTime} onChange={(event) => { setWaitTime(event.target.value) }} style={{ width: "320px" }} inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} />
+                        <TextField error={waitTime < 0} value={waitTime} onChange={(event) => { setWaitTime(event.target.value) }} style={{ width: "320px" }} type="number" />
 
                         <p className="how-would-you-rate-the-food inter-semi-bold-black-20px">
                             How would you rate the food?
                         </p>
                         <div className="menu-rating">
                             {/* stars here, use MUI */}
-                            <Rating name="half-rating-read" precision={0.5} sx={{ fontSize: "2vw" }} />
+                            <Rating 
+                                name="half-rating-read" 
+                                value={stars} 
+                                onChange={(event, newValue) => {
+                                     setStars(newValue);}}
+                                precision={0.5} 
+                                sx={{ fontSize: "2vw" }} />
                         </div>
                         <div className="overlap-group3">
                             {/* <button>Submit!</button> */}
-                            <Button variant="contained">Submit!</Button>
+                            <Button onClick={handleSubmit} disabled={waitTime === '' || waitTime < 0 || stars === null || diningHall === null} variant="contained">Submit!</Button>
                         </div>
                     </div>
                 </div>
