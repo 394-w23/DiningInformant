@@ -49,7 +49,8 @@ export const HomePage = () => {
         </section>
       </header>
       {cards}
-      <Form />
+      {/* <Form /> */}
+      <button className="shareYourExperience" type="button">Share Your Experience!</button>
     </>
   );
 };

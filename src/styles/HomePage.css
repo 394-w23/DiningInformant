@@ -88,3 +88,13 @@ header * {
   justify-content: flex-end;
   color: blue;
 }
+
+.shareYourExperience {
+  background: #452c63;
+  border-radius: 10px;
+  color: white;
+  padding: 20px;
+  width: 90%;
+  border: none;
+  font-size: 28px;
+}
