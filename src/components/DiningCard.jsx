@@ -15,7 +15,7 @@ export const DiningCard = (props) => {
 
   return (
     <section className="cards">
-      <div className="hall">
+      <div>
         <img className="hallpic" src={imageLink} alt={`Picture of ${diningHallId}`} />
         <div className="hallname">
           <h2>{diningHallId}</h2>

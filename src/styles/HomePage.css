@@ -6,11 +6,16 @@ header {
   width: 100%;
   background-color: white;
   font-family: sans-serif;
+  z-index: 2;
 }
 
 header * {
   display: flex;
   height: 100%;
+}
+
+.newbar {
+  margin-bottom: 0;
 }
 
 .newleft {

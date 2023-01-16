@@ -15,12 +15,7 @@
   flex-direction: column;
 }
 
-.hall {
-  /* height: 20%; */
-}
-
 .hallname {
-  
   padding-bottom: 10%;
   width: 100%;
   font-family: 'Comfortaa', cursive;
@@ -32,7 +27,7 @@
 
 .hallpic {
   width: 100%;
-  height: 100px;
+  /* height: 100px; */
   max-height: 100px; 
   overflow: hidden;
   border-radius: 25px;
