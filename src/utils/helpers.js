@@ -33,3 +33,11 @@ export const getLatestRatings = (diningHalls) => {
   return result;
 };
 
+/*
+return type
+{
+  Sargent: rating,
+  Allison: rating,
+  ...
+}
+*/
