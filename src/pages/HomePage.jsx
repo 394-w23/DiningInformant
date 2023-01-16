@@ -24,7 +24,7 @@ export const HomePage = () => {
         key={diningHall['Dining Hall Id']} //{diningHall['Dining Hall Id']}
         waitTime={diningHall['Wait Time']} //{diningHall['Wait Time']}
         diningHallId={diningHall['Dining Hall Id']} //{diningHall['Dining Hall Id']}
-        featuredItems={['Cajun Chicken', 'Roasted Broccoli']} //{diningHall['Featured Items']}
+        featuredItems={['Cajun Chicken', 'Roasted Broccoli', 'Pepperoni Pizza']} //{diningHall['Featured Items']}
         stars={4.3} //{diningHall['Stars']}
         imageLink={imageDict[diningHall['Dining Hall Id']]} //{diningHall['Image Link']}
       />

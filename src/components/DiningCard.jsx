@@ -31,12 +31,15 @@ export const DiningCard = (props) => {
               <h1> Featured Items </h1>
             </div>
             {/* <!-- Featured Items --> */}
-            <div className="item1">{featuredItems[0]}</div>
-            <div className="item2">{featuredItems[1]}</div>
+            <div className="featureditemslist">
+              <div className="item">{featuredItems[0]}</div>
+              <div className="item">{featuredItems[1]}</div>
+              <div className="item">{featuredItems[2]}</div>
+            </div>
           </div>
           <div className="waitscore">
             {/* Worth the Wait Score */}
-            <Rating name="half-rating-read" value={stars} precision={0.5} readOnly />
+            <Rating name="half-rating-read" value={stars} precision={0.5} readOnly sx={{fontSize: "2vw"}} />
             {/* <Rating name="read-only" value={stars} readOnly /> */}
             {/* <p>{stars}</p> */}
           </div>

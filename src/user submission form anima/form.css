@@ -66,9 +66,8 @@
     border: 1px none;
     display: flex;
     flex-direction: column;
-    height: 844px;
     overflow: hidden;
-    width: 390px;
+    width: 100%;
 }
 
 .header {
@@ -77,10 +76,10 @@
     display: flex;
     flex-direction: row;
     flex-shrink: 1;
-    height: 89px; /* likely will change to a percentage */
+    /* height: 89px; likely will change to a percentage */
     justify-content: flex-start;
-    min-width: 418px; /* likely will change to a percentage */
-    width: auto;
+    /* min-width: 418px; likely will change to a percentage */
+    width: 100%;
 }
 
 .overlap-group4 {
@@ -93,7 +92,7 @@
     gap: 4px; /* likely will change to a percentage */
     min-height: 89px; /* likely will change to a percentage */
     padding: 14px 30px; /* likely will change to a percentage */
-    width: 412px; /* likely will change to a percentage */
+    width: 100%; /* likely will change to a percentage */
 }
 
 /* likely will change all of this to percentages */
