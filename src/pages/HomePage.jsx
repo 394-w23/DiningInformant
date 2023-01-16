@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { DiningCard } from '../components/DiningCard';
 import { Form } from '../components/Form';
 import { getWaitTimes, streamWaitTimes, useDbData } from '../utils/firebase';
-import { getLatestWaitTimeForHalls } from '../utils/helpers';
+import { getLatestWaitTimeForHalls, useDiningHallData } from '../utils/helpers';
+import { Menu } from '../components/Menu';
 
 const imageDict = {
   Allison:
@@ -17,6 +18,10 @@ const imageDict = {
 
 export const HomePage = () => {
   const [waitTimes, error] = useDbData();
+  // const [data, loading, menuError] = useDiningHallData();
+
+  // console.log(loading)
+  // console.log(data)
 
   const cards = waitTimes.map((diningHall) => {
     return (
@@ -50,6 +55,7 @@ export const HomePage = () => {
       </header>
       {cards}
       <Form />
+      <Menu open={true}/>
     </>
   );
 };

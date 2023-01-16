@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, CircularProgress, Modal, Paper, Typography } from '@mui/material';
+import { useDiningHallData } from '../utils/helpers';
 
 const tabs = ['Breakfast', 'Lunch', 'Dinner'];
 
@@ -24,37 +25,22 @@ const TabPanel = (props) => {
 
 export const Menu = (props) => {
   const { open, onClose } = props;
+  const [data, loading, menuError] = useDiningHallData();
+
 
   const [tabSelected, setTabSelected] = useState(0);
-
-  // State for fetching data directly
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
 
   const handleTabButtonPush = (event) => {
     setTabSelected(Number(event.target.id));
   };
 
-  // Hook for fetching data directly
-  useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((jsonData) => {
-        const { menu } = jsonData;
-        const { periods } = menu;
-        const { categories } = periods;
-
-        setData(categories);
-        setLoading(false);
-      })
-      .catch((e) => {
-        setLoading(false);
-        console.log(e);
-      });
-  }, []);
-
   // breakfast menu array
-  const menuItems = data.map((category) => {
+
+  var menuItems = " ";
+  if(!loading) {
+    // console.log(data);
+    // console.log(data['Sargent']);
+    menuItems = data['Sargent'][tabSelected].map((category) => {
     const { name, items } = category;
 
     return (
@@ -74,6 +60,7 @@ export const Menu = (props) => {
       </div>
     );
   });
+}
 
   return (
     <Modal style={{ margin: '20px 20px' }} open={open} onClose={onClose}>
@@ -97,10 +84,10 @@ export const Menu = (props) => {
             {loading ? <CircularProgress /> : menuItems}
           </TabPanel>
           <TabPanel value={tabSelected} index={1}>
-            Item Two
+          {loading ? <CircularProgress /> : menuItems}
           </TabPanel>
           <TabPanel value={tabSelected} index={2}>
-            Item Three
+          {loading ? <CircularProgress /> : menuItems}
           </TabPanel>
         </div>
       </Paper>
