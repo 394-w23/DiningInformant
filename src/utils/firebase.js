@@ -10,7 +10,7 @@ import {
   query,
   onSnapshot
 } from 'firebase/firestore';
-import { getLatestWaitTimeForHalls } from './helpers';
+import { getLatestRatings, getLatestWaitTimeForHalls } from './helpers';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDrtj71l3VbmET1bKGtekAsifVzRlUmgHU',
@@ -45,20 +45,32 @@ export async function getDiningHallInfo() {
   return diningList;
 }
 
+
 export const streamWaitTimes = (snapshot, error) => {
   const itemsColRef = collection(db, 'Waiting Times');
   const waitQuery = query(itemsColRef, orderBy('Timestamp', 'asc'));
   return onSnapshot(waitQuery, snapshot, error);
 };
 
-export async function submitForm(diningHallId, waitTime) {
+export const streamRatings = (snapshot, error) =>{
+  const itemsColRef = collection(db, 'Ratings');
+  const ratingQuery = query(itemsColRef, orderBy('Timestamp', 'asc'));
+  return onSnapshot(ratingQuery, snapshot, error);
+}
+
+export async function submitForm(diningHallId, waitTime, rating) {
   try {
-    const docRef = await addDoc(collection(db, 'Waiting Times'), {
+    const waitingTimesRef = await addDoc(collection(db, 'Waiting Times'), {
       'Dining Hall Id': diningHallId,
       'Wait Time': waitTime,
       Timestamp: Timestamp.now()
     });
-    console.log('Document written with ID: ', docRef.id);
+    const ratingsRef = await addDoc(collection(db, 'Ratings'), {
+      'Dining Hall Id': diningHallId,
+      'Stars': rating,
+      Timestamp: Timestamp.now()
+    });
+    console.log('Document written with ID: ', waitingTimesRef.id);
   } catch (e) {
     console.error('Error adding document: ', e);
   }
@@ -66,20 +78,35 @@ export async function submitForm(diningHallId, waitTime) {
 }
 
 export const useDbData = () => {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
+  const [waitTimeData, setWaitTimeData] = useState([]);
+  const [waitTimeError, setWaitTimeError] = useState(null);
 
   useEffect(() => {
     const unsubscribe = streamWaitTimes(
       (querySnapshot) => {
         const updatedWaitTimes = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
         const latestWaitTimes = getLatestWaitTimeForHalls(updatedWaitTimes);
-        setData(latestWaitTimes);
+        setWaitTimeData(latestWaitTimes);
       },
-      () => setError('Failed to get wait times')
+      () => setWaitTimeError('Failed to get wait times')
     );
     return unsubscribe;
   }, []);
 
-  return [data, error];
+  const [ratingData, setRatingData] = useState([]);
+  const [ratingError, setRatingError] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = streamRatings(
+      (querySnapshot) => {
+        const updatedRatings = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+        const latestRatings = getLatestRatings(updatedRatings);
+        setRatingData(latestRatings);
+      },
+      () => setRatingError('Failed to get ratings')
+    );
+    return unsubscribe;
+  }, []);
+
+  return [waitTimeData, waitTimeError, ratingData, ratingError];
 };

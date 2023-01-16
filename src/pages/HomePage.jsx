@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { DiningCard } from '../components/DiningCard';
 import { Form } from '../components/Form';
-import { getWaitTimes, streamWaitTimes, useDbData } from '../utils/firebase';
-import { getLatestWaitTimeForHalls } from '../utils/helpers';
+import {useDbData} from '../utils/firebase';
+import { getLatestWaitTimeForHalls, getLatestRatings } from '../utils/helpers';
 
 const imageDict = {
   Allison:
@@ -16,7 +16,9 @@ const imageDict = {
 };
 
 export const HomePage = () => {
-  const [waitTimes, error] = useDbData();
+  const [waitTimes, waitTimesError, ratings, ratingsError] = useDbData();
+
+  console.log(ratings);
 
   const cards = waitTimes.map((diningHall) => {
     return (
@@ -25,12 +27,12 @@ export const HomePage = () => {
         waitTime={diningHall['Wait Time']} //{diningHall['Wait Time']}
         diningHallId={diningHall['Dining Hall Id']} //{diningHall['Dining Hall Id']}
         featuredItems={['Cajun Chicken', 'Roasted Broccoli']} //{diningHall['Featured Items']}
-        stars={4.3} //{diningHall['Stars']}
+        stars={4.3}
         imageLink={imageDict[diningHall['Dining Hall Id']]} //{diningHall['Image Link']}
       />
     );
   });
-
+  
   return (
     <>
       <header>
