@@ -24,11 +24,15 @@ const TabPanel = (props) => {
 };
 
 export const Menu = (props) => {
-  const { open, onClose } = props;
-  const [data, loading, menuError] = useDiningHallData();
+  const { open, onClose, data, loading, diningHallId, toggleModal } = props;
+  // var isOpen = false;
+  // const [data, loading, menuError] = useDiningHallData();
 
 
   const [tabSelected, setTabSelected] = useState(0);
+
+  // console.log(diningHallId);
+  // console.log(open);
 
   const handleTabButtonPush = (event) => {
     setTabSelected(Number(event.target.id));
@@ -40,7 +44,7 @@ export const Menu = (props) => {
   if(!loading) {
     // console.log(data);
     // console.log(data['Sargent']);
-    menuItems = data['Sargent'][tabSelected].map((category) => {
+    menuItems = data[diningHallId][tabSelected].map((category) => {
     const { name, items } = category;
 
     return (
@@ -65,6 +69,7 @@ export const Menu = (props) => {
   return (
     <Modal style={{ margin: '20px 20px' }} open={open} onClose={onClose}>
       <Paper className="MenuPaper">
+      <button onClick={toggleModal}>Close {diningHallId}</button>
         <ul className="MenuTabs">
           {tabs.map((tab, index) => {
             return (

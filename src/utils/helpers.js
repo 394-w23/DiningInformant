@@ -36,9 +36,19 @@ export const useDiningHallData = () => {
 
 
   const fetchMenus = async () => {
+    var currentDate = new Date();
+    var day = String(currentDate.getDate());
+    var month = String(currentDate.getMonth()+1);
+    var year = currentDate.getFullYear();
+
+    // console.log(day);
+    // console.log(month);
+    // console.log(year);
+
   //TODO: Change hard coded date to current date on load
   var breakfastPromises = diningHalls.map((key) => {
-    var url = `https://api.dineoncampus.com/v1/location/${locationDict[key]}/periods?platform=0&date=2023-1-15`;
+    var url = `https://api.dineoncampus.com/v1/location/${locationDict[key]}/periods?platform=0&date=${year}-${month}-${day}`;
+    // console.log(url);
     return fetch(url);
   });
   const breakfast = await Promise.all(breakfastPromises)
@@ -49,12 +59,12 @@ export const useDiningHallData = () => {
 
   var lunchPromises = diningHalls.map((key, index) => {
     var id = rawBreakfastData[index]['periods'][1]['id']
-    var url = `https://api.dineoncampus.com/v1/location/${locationDict[key]}/periods/${id}?platform=0&date=2023-1-15`;
+    var url = `https://api.dineoncampus.com/v1/location/${locationDict[key]}/periods/${id}?platform=0&date=${year}-${month}-${day}`;
     return fetch(url);
   });
   var dinnerPromises = diningHalls.map((key, index) => {
     var id = rawBreakfastData[index]['periods'][2]['id']
-    var url = `https://api.dineoncampus.com/v1/location/${locationDict[key]}/periods/${id}?platform=0&date=2023-1-15`;
+    var url = `https://api.dineoncampus.com/v1/location/${locationDict[key]}/periods/${id}?platform=0&date=${year}-${month}-${day}`;
     return fetch(url);
   });
 

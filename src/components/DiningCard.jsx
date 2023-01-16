@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Rating from '@mui/material/Rating';
+import { Menu } from './Menu';
 
 export const DiningCard = (props) => {
-  const { waitTime, diningHallId, featuredItems, stars, imageLink } = props;
+  const { waitTime, diningHallId, featuredItems, stars, imageLink, diningData, loading } = props;
+
+  const [isOpen, toggleOpen] = useState(false);
+
+  const openModal = (event) => {
+    toggleOpen(!isOpen);
+  };
+
 
   let color;
   if (waitTime < 10) {
@@ -55,7 +63,8 @@ export const DiningCard = (props) => {
             min
 
           </div>
-          <div className="more">More -</div>
+          <div className="more"><button onClick={openModal}>More -</button></div>
+          <Menu open={isOpen} loading={loading} data={diningData} diningHallId={diningHallId} toggleModal={openModal}/>
 
         </div>
       </div>

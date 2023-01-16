@@ -18,7 +18,7 @@ const imageDict = {
 
 export const HomePage = () => {
   const [waitTimes, error] = useDbData();
-  // const [data, loading, menuError] = useDiningHallData();
+  const [data, loading, menuError] = useDiningHallData();
 
   // console.log(loading)
   // console.log(data)
@@ -32,6 +32,8 @@ export const HomePage = () => {
         featuredItems={['Cajun Chicken', 'Roasted Broccoli']} //{diningHall['Featured Items']}
         stars={4.3} //{diningHall['Stars']}
         imageLink={imageDict[diningHall['Dining Hall Id']]} //{diningHall['Image Link']}
+        diningData={data}
+        loading={loading}
       />
     );
   });
@@ -55,7 +57,7 @@ export const HomePage = () => {
       </header>
       {cards}
       <Form />
-      <Menu open={true}/>
+      {/* <Menu open={true} loading={loading} data={data}/> */}
     </>
   );
 };
