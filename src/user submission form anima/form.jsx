@@ -16,10 +16,10 @@ export const Form = () => {
                     <h1 className="shareYourExperienceH1">Share Your Experience!</h1>
                 </div>
                 <div className="question">
-                    <h1>Which dining hall did you go to?</h1>
+                    <h1 className="questionH1">Which dining hall did you go to?</h1>
                 </div>
                 <div className="response">
-                    <select id="userDiningHall">\
+                    <select className="formdropdown" id="userDiningHall">\
                         <option value=""></option>
                         <option value="Allison">Allison</option>
                         <option value="Elder">Elder</option>
@@ -28,19 +28,19 @@ export const Form = () => {
                     </select>
                 </div>
                 <div className="question">
-                    <h1>What was your wait time in minutes?</h1>
+                    <h1 className="questionH1">What was your wait time in minutes?</h1>
                 </div>
                 <div className="response">
-                    <input type="number" min="0" max="40" id="userWaitTime"></input>
+                    <input className="waittimeinput" type="number" min="0" max="40" id="userWaitTime"></input>
                 </div>
                 <div className="question">
-                    <h1>How would you rate the food?</h1>
+                    <h1 className="questionH1">How would you rate the food?</h1>
                 </div>
                 <div className="response">
-                    <Rating name="half-rating-read" precision={0.5} sx={{fontSize: "2vw"}} id="userStars" />
-                </div>
+                    
+                </div><Rating name="half-rating-read" precision={0.5} sx={{fontSize: "25%"}} id="userStars" />
                 <div className="buttoncontainer">
-                    <button>Submit!</button>
+                    <button className="submitbutton">Submit!</button>
                 </div>
             </div>
         </>
