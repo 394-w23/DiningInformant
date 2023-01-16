@@ -4,6 +4,7 @@ import { Form } from '../components/Form';
 import { getWaitTimes, streamWaitTimes, useDbData } from '../utils/firebase';
 import { getLatestWaitTimeForHalls } from '../utils/helpers';
 
+
 const imageDict = {
   Allison:
     'https://www.food-management.com/sites/food-management.com/files/styles/article_featured_retina/public/overview_and_seating_0.jpg?itok=4CkHvmca',

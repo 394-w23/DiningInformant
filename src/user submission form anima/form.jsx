@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Rating from '@mui/material/Rating';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 export const Form = () => {
+    const dininghalls = [{ title: "Allison" }, { title: "Elder" }, { title: "Plex West" }, { title: "Sargent" }];
+
+    const [diningHall, setDiningHall] = useState(null);
+    const [waitTime, setWaitTime] = useState(null);
+
+    console.log(diningHall)
+    console.log(waitTime)
+
     return (
         <div className="container-center-horizontal">
             <div className="iphone-14-1 screen">
@@ -31,30 +42,61 @@ export const Form = () => {
                         <p className="which-dining-hall-did-you-go-to inter-semi-bold-black-20px">
                             Which dining hall did you go to?
                         </p>
-                        <div className="overlap-group1">
+                        {/* <div className="overlap-group1">
                             <select id="diningHall">
                                 <option value="Allison">Allison</option>
                                 <option value="Elder">Elder</option>
                                 <option value="Plex West">Plex West</option>
                                 <option value="Sargent">Sargent</option>
                             </select>
-                        </div>
+                        </div> */}
+                        <Autocomplete
+                            id="size-small-filled"
+                            size="small"
+                            value={diningHall}
+                            onChange={(event, newValue) => { setDiningHall(newValue) }}
+                            style={{ width: "320px" }}
+                            options={dininghalls}
+                            getOptionLabel={(option) => option.title}
+                            defaultValue={dininghalls[0]}
+                            renderTags={(value, getTagProps) =>
+                                value.map((option, index) => (
+                                    <Chip
+                                        variant="outlined"
+                                        label={option.title}
+                                        size="small"
+                                        {...getTagProps({ index })}
+                                    />
+                                ))
+                            }
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    variant="filled"
+                                    label="Size small"
+                                    placeholder="Favorites"
+                                />
+                            )}
+                        />
                         <p className="how-many-minutes-did-you-wait inter-semi-bold-black-20px">
                             How many minutes did you wait?
                         </p>
-                        <div className="overlap-group-1">
-                            {/* make this an input number field */}
+                        {/* <div className="overlap-group-1">
+                            
                             <input type="number" min="0" max="40"></input>
-                        </div>
+                        </div> */}
+                        <TextField value={waitTime} onChange={(event) => { setWaitTime(event.target.value) }} style={{ width: "320px" }} inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} />
+
                         <p className="how-would-you-rate-the-food inter-semi-bold-black-20px">
                             How would you rate the food?
                         </p>
                         <div className="menu-rating">
                             {/* stars here, use MUI */}
-                            <Rating name="half-rating-read" precision={0.5} sx={{fontSize: "2vw"}} />
+                            <Rating name="half-rating-read" precision={0.5} sx={{ fontSize: "2vw" }} />
                         </div>
                         <div className="overlap-group3">
-                            <button>Submit!</button>
+                            {/* <button>Submit!</button> */}
+                            <Button variant="contained">Submit!</Button>
                         </div>
                     </div>
                 </div>
