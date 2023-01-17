@@ -26,7 +26,7 @@ export const DiningCard = (props) => {
       <div className="hall">
         <img className="hallpic" src={imageLink} alt={`Picture of ${diningHallId}`} />
         <div className="hallname">
-          <h2>{diningHallId}</h2>
+          <h2>{diningHallId} Dining Hall</h2>
         </div>
       </div>
       <div className="middle">
@@ -36,7 +36,7 @@ export const DiningCard = (props) => {
           </div> */}
           <div className="featureditems">
             <div className="featuredlabel">
-              <h1> Featured Items </h1>
+              <h1> Featured Items: </h1>
             </div>
             {/* <!-- Featured Items --> */}
             <div className="item1">{featuredItems[0]}</div>
@@ -63,7 +63,10 @@ export const DiningCard = (props) => {
             min
 
           </div>
-          <div className="more"><button onClick={openModal}>More -</button></div>
+          <div className="more">
+          <button className="morebutton" onClick={openModal}> More <i class="fas fa-arrow-right"></i></button>
+          </div>
+          
           <Menu open={isOpen} loading={loading} data={diningData} diningHallId={diningHallId} toggleModal={openModal}/>
 
         </div>

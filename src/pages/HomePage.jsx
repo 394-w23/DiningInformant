@@ -40,24 +40,28 @@ export const HomePage = () => {
 
   return (
     <>
+      
+      {cards}
       <header>
-        <section className="newbar">
+        <div className="newbar">
           <div className="newleft">
             <h2>DiningInformant</h2>
           </div>
           <div className="topright">
-            <div className="sortby">
-              <h1>sortby</h1>
-            </div>
+            <button className="sortby">
+              Sort By <i className="fas fa-arrow-down"></i>
+            </button>
             {/* <div className="menu">
               <a href="#"> ...</a>
             </div> */}
           </div>
-        </section>
+        </div>
       </header>
-      {cards}
-      <Form />
+      {/* <Form /> */}
       {/* <Menu open={true} loading={loading} data={data}/> */}
+      <div className="footer"><button className='share' > Share your experience!</button></div>
+      {/* <Menu open={isOpen} loading={loading} data={diningData} diningHallId={diningHallId} toggleModal={openModal}/> */}
+      {/* <footer> space </footer> */}
     </>
   );
 };
