@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Rating from '@mui/material/Rating';
+import { Menu } from './Menu';
 
 export const DiningCard = (props) => {
-  const { waitTime, diningHallId, featuredItems, stars, imageLink } = props;
+  const { waitTime, diningHallId, featuredItems, stars, imageLink, diningData, loading } = props;
+
+  const [isOpen, toggleOpen] = useState(false);
+
+  const openModal = (event) => {
+    toggleOpen(!isOpen);
+  };
+
 
   let color;
   if (waitTime < 10) {
@@ -18,7 +26,7 @@ export const DiningCard = (props) => {
       <div>
         <img className="hallpic" src={imageLink} alt={`Picture of ${diningHallId}`} />
         <div className="hallname">
-          <h2>{diningHallId}</h2>
+          <h2>{diningHallId} Dining Hall</h2>
         </div>
       </div>
       <div className="middle">
@@ -28,7 +36,7 @@ export const DiningCard = (props) => {
           </div> */}
           <div className="featureditems">
             <div className="featuredlabel">
-              <h1> Featured Items </h1>
+              <h1> Featured Items: </h1>
             </div>
             {/* <!-- Featured Items --> */}
             <div className="featureditemslist">
@@ -58,7 +66,11 @@ export const DiningCard = (props) => {
             min
 
           </div>
-          <div className="more">More -</div>
+          <div className="more">
+          <button className="morebutton" onClick={openModal}> More <i class="fas fa-arrow-right"></i></button>
+          </div>
+          
+          <Menu open={isOpen} loading={loading} data={diningData} diningHallId={diningHallId} toggleModal={openModal}/>
 
         </div>
       </div>
