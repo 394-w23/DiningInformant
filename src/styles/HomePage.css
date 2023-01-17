@@ -3,12 +3,12 @@ header {
   left: 0;
   position: fixed;
   width: 96%;
-  height: 10%;
+  height: 9%;
   background-color: white;
   font-family: sans-serif;
   overflow: hidden;
-  padding: 2%;
-  z-index: 2;
+  padding: 2% 2% 0 2%;
+  z-index: 3;
 }
 
 header * {
@@ -50,14 +50,14 @@ button {
 
 .footer {
   box-sizing: border-box;
-  bottom: 1%; 
-  left: 12.5%;
+  bottom: 5%; 
+  left: 5%;
   position: fixed;
   background-color: none;
   color: #4E2A84;
-  width: 75%;
+  width: 90%;
   height: 7%;
-  border-radius: 15px;
+  border-radius: 10px;
   font-family: sans-serif;
 }
 
