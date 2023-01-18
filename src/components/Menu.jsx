@@ -69,7 +69,7 @@ export const Menu = (props) => {
   return (
     <Modal style={{ margin: '20px 20px' }} open={open} onClose={onClose}>
       <Paper className="MenuPaper">
-      <button onClick={toggleModal}>Close {diningHallId}</button>
+        <button onClick={toggleModal}>Close {diningHallId}</button>
         <ul className="MenuTabs">
           {tabs.map((tab, index) => {
             return (

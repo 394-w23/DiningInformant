@@ -3,7 +3,7 @@ header {
   left: 0;
   position: fixed;
   width: 96%;
-  height: 9%;
+  height: 11%;
   background-color: white;
   font-family: sans-serif;
   overflow: hidden;
@@ -81,7 +81,7 @@ button {
 
 .sortby {
   width: 100%;
-  padding:0;
+  padding: 0;
 }
 
 .shareYourExperience {

@@ -23,9 +23,11 @@
   background: #7f59b8;
   font-size: 1.5em;
 }
+
 .MenuTabs li:hover {
   background: rgba(127, 89, 184, 0.6);
 }
+
 .MenuTabs li.active {
   background-color: #4e2a84;
 }

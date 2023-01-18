@@ -1,5 +1,5 @@
 import { HomePage } from './pages/HomePage';
-import { Form } from './user submission form anima/form'; 
+import { Form } from './components/Form'; 
 
 const App = () => {
   // return <Form />;

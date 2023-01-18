@@ -31,14 +31,10 @@ export const DiningCard = (props) => {
       </div>
       <div className="middle">
         <div className="middleleft">
-          {/* <div className="hallname">
-            <h2>{diningHallId}</h2>
-          </div> */}
           <div className="featureditems">
             <div className="featuredlabel">
               <h1> Featured Items: </h1>
             </div>
-            {/* <!-- Featured Items --> */}
             <div className="featureditemslist">
               <div className="item">{featuredItems[0]}</div>
               <div className="item">{featuredItems[1]}</div>
@@ -46,32 +42,23 @@ export const DiningCard = (props) => {
             </div>
           </div>
           <div className="waitscore">
-            {/* Worth the Wait Score */}
-            <Rating name="half-rating-read" value={stars} precision={0.5} readOnly sx={{fontSize: "2vw"}} />
-            {/* <Rating name="read-only" value={stars} readOnly /> */}
-            {/* <p>{stars}</p> */}
+            <Rating name="half-rating-read" defaultValue={3} value={stars} precision={0.5} readOnly sx={{fontSize: "2vw"}} />
           </div>
         </div>
         <div className="middleright">
 
           <div className="waitlabel" style={{ backgroundColor: color }}>
             <div className="waittime">
-              {/* <p>
-                {`${waitTime} `}
-                
-              </p> */}
               {`${waitTime} `}
             </div>
-            {/* <span>min</span> */}
             min
-
           </div>
           <div className="more">
-          <button className="morebutton" onClick={openModal}> More <i className="fas fa-arrow-right"></i></button>
+            <button className="morebutton" onClick={openModal}>
+              More <i className="fas fa-arrow-right"></i>
+            </button>
           </div>
-          
           <Menu open={isOpen} loading={loading} data={diningData} diningHallId={diningHallId} toggleModal={openModal}/>
-
         </div>
       </div>
     </section>
