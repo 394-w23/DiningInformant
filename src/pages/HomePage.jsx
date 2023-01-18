@@ -22,13 +22,14 @@ export const HomePage = () => {
   const [waitTimes, waitTimesError, ratings, ratingsError] = useDbData();
 
   const cards = waitTimes.map((diningHall) => {
+    // console.log(ratings[diningHall['Dining Hall Id']]);
     return (
       <DiningCard
         key={diningHall['Dining Hall Id']} //{diningHall['Dining Hall Id']}
         waitTime={diningHall['Wait Time']} //{diningHall['Wait Time']}
         diningHallId={diningHall['Dining Hall Id']} //{diningHall['Dining Hall Id']}
         featuredItems={['Cajun Chicken', 'Roasted Broccoli', 'Pepperoni Pizza']} //{diningHall['Featured Items']}
-        stars={4.3} //{diningHall['Stars']}
+        stars={ratings ? ratings[diningHall['Dining Hall Id']] : 0} //{diningHall['Stars']}
 
         imageLink={imageDict[diningHall['Dining Hall Id']]} //{diningHall['Image Link']}
         diningData={data}
@@ -52,9 +53,9 @@ export const HomePage = () => {
             <h2>DiningInformant</h2>
           </div>
           <div className="topright">
-            <button className="sortby">
+            {/* <button className="sortby">
               Sort By <i className="fas fa-arrow-down"></i>
-            </button>
+            </button> */}
           </div>
         </div>
       </header>

@@ -52,7 +52,6 @@ export const DiningCard = (props) => {
           <div className="waitscore">
             <Rating
               name="half-rating-read"
-              defaultValue={3}
               value={stars}
               precision={0.5}
               readOnly

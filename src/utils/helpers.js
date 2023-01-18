@@ -20,14 +20,13 @@ export const getLatestWaitTimeForHalls = (diningHalls) => {
 //will change into an average ratings function, takes the ratings for a certain dining halls for last 15 minutes
 export const getLatestRatings = (diningHalls) => {
   var seenHalls = new Set();
-  var result = [];
-
+  var result = {};
   diningHalls.reverse();
 
   diningHalls.forEach((diningHall) => {
     const id = diningHall['Dining Hall Id'];
-    if (!seenHalls.has(id) && result.length < 4) {
-      result.push(diningHall);
+    if (!seenHalls.has(id) && seenHalls.size < 4) {
+      result[id] = Number(diningHall['Stars'])
       seenHalls.add(id);
     }
   });

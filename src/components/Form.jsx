@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { submitForm } from '../utils/firebase';
-import { Rating, Modal, Paper } from '@mui/material';
+import { Rating, Modal, Paper, Button, Select, MenuItem } from '@mui/material';
 
 export const Form = (props) => {
   const { open, onClose, toggleModal } = props;
 
   const [diningHallId, setDiningHallId] = useState('');
   const [waitTime, setWaitTime] = useState(0);
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(null);
 
   const handleWaitTimeChange = (event) => {
     setWaitTime(event.target.value);
@@ -16,13 +16,17 @@ export const Form = (props) => {
     setDiningHallId(event.target.value);
   };
 
-  const handleRatingChange = (event) => {
-    setRating(event.target.value);
+  const handleRatingChange = (event, newValue) => {
+    setRating(newValue);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     submitForm(diningHallId, waitTime, rating);
+    toggleModal();
+    setDiningHallId('');
+    setWaitTime(0);
+    setRating(null);
   };
 
 // old return
@@ -69,13 +73,19 @@ export const Form = (props) => {
                             <h1 className="questionH1">Which dining hall did you go to?</h1>
                         </div>
                         <div className="response">
-                            <select className="formdropdown" value={diningHallId} onChange={handleDiningHallChange} id="diningHall">
-                                <option value=""></option>
+                            {/* <select className="formdropdown" value={diningHallId} onChange={handleDiningHallChange} id="diningHall">
+                                <option value="None"></option>
                                 <option value="Allison">Allison</option>
                                 <option value="Elder">Elder</option>
                                 <option value="Plex West">Plex West</option>
                                 <option value="Sargent">Sargent</option>
-                            </select>
+                            </select> */}
+                            <Select className="formdropdown" value={diningHallId} onChange={handleDiningHallChange} id="diningHall">
+                                <MenuItem value={"Allison"}>Allison</MenuItem>
+                                <MenuItem value={"Elder"}>Elder</MenuItem>
+                                <MenuItem value={"Plex West"}>Plex West</MenuItem>
+                                <MenuItem value={"Sargent"}>Sargent</MenuItem>
+                            </Select>
                         </div>
                         <div className="question">
                             <h1 className="questionH1">What was your wait time in minutes?</h1>
@@ -90,7 +100,9 @@ export const Form = (props) => {
                             <Rating name="half-rating-read" precision={0.5} size="large" id="userStars" value={rating} onChange={handleRatingChange}/>
                         </div>
                         <div className="buttoncontainer">
-                            <button className="submitbutton" onClick={handleSubmit} id="submit" type="submit">Submit!</button>
+                            <Button className="submitbutton" onClick={handleSubmit} 
+                            disabled={waitTime === '' || waitTime < 0 || waitTime > 120 || rating === null || diningHallId === ""}
+                            id="submit" type="submit">Submit!</Button>
                         </div>
                     </div>
                 </Paper>

@@ -90,3 +90,7 @@
     display: flex;
     flex-direction: column;
 }
+
+button[disabled=disabled], button:disabled {
+  background: grey;
+}
