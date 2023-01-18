@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Rating from '@mui/material/Rating';
 import { Menu } from './Menu';
+import { CircularProgress } from '@mui/material';
 
 export const DiningCard = (props) => {
-  const { waitTime, diningHallId, featuredItems, stars, imageLink, diningData, loading } = props;
+  const { waitTime, diningHallId, stars, imageLink, diningData, loading } = props;
 
   const [isOpen, toggleOpen] = useState(false);
 
-  const openModal = (event) => {
+  const featuredItems = diningData ? diningData[diningHallId][2][0]['items'].slice(0, 3) : [];
+
+  const openModal = () => {
     toggleOpen(!isOpen);
   };
-
 
   let color;
   if (waitTime < 10) {
@@ -23,7 +25,7 @@ export const DiningCard = (props) => {
 
   return (
     <section className="cards">
-      <div className="hall">
+      <div>
         <img className="hallpic" src={imageLink} alt={`Picture of ${diningHallId}`} />
         <div className="hallname">
           <h2>{diningHallId} Dining Hall</h2>
@@ -31,44 +33,50 @@ export const DiningCard = (props) => {
       </div>
       <div className="middle">
         <div className="middleleft">
-          {/* <div className="hallname">
-            <h2>{diningHallId}</h2>
-          </div> */}
           <div className="featureditems">
             <div className="featuredlabel">
               <h1> Featured Items: </h1>
             </div>
-            {/* <!-- Featured Items --> */}
-            <div className="item1">{featuredItems[0]}</div>
-            <div className="item2">{featuredItems[1]}</div>
+            <div className="featureditemslist">
+              {loading ? <CircularProgress /> : null}
+              {featuredItems.map((item) => {
+                const { name } = item;
+                return (
+                  <div key={name} className="item">
+                    {name}
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <div className="waitscore">
-            {/* Worth the Wait Score */}
-            <Rating name="half-rating-read" value={stars} precision={0.5} readOnly />
-            {/* <Rating name="read-only" value={stars} readOnly /> */}
-            {/* <p>{stars}</p> */}
+            <Rating
+              name="half-rating-read"
+              defaultValue={3}
+              value={stars}
+              precision={0.5}
+              readOnly
+              sx={{ fontSize: '2vw' }}
+            />
           </div>
         </div>
         <div className="middleright">
-
           <div className="waitlabel" style={{ backgroundColor: color }}>
-            <div className="waittime">
-              {/* <p>
-                {`${waitTime} `}
-                
-              </p> */}
-              {`${waitTime} `}
-            </div>
-            {/* <span>min</span> */}
+            <div className="waittime">{`${waitTime} `}</div>
             min
-
           </div>
           <div className="more">
-          <button className="morebutton" onClick={openModal}> More <i class="fas fa-arrow-right"></i></button>
+            <button className="morebutton" onClick={openModal}>
+              More <i className="fas fa-arrow-right"></i>
+            </button>
           </div>
-          
-          <Menu open={isOpen} loading={loading} data={diningData} diningHallId={diningHallId} toggleModal={openModal}/>
-
+          <Menu
+            open={isOpen}
+            loading={loading}
+            data={diningData}
+            diningHallId={diningHallId}
+            toggleModal={openModal}
+          />
         </div>
       </div>
     </section>

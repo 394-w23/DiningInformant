@@ -8,7 +8,7 @@ import {useDbData} from '../utils/firebase';
 
 const imageDict = {
   Allison:
-    'https://www.food-management.com/sites/food-management.com/files/styles/article_featured_retina/public/overview_and_seating_0.jpg?itok=4CkHvmca',
+    'https://wbo.com/wp-content/uploads/2019/10/Allison-Dining-Hall-sating-and-food-service-1500x1000.png',
   Sargent:
     'https://sites.northwestern.edu/northeastarea/files/2019/09/SargentDining1-1-550x310.jpeg',
   Elder:
@@ -27,18 +27,24 @@ export const HomePage = () => {
         key={diningHall['Dining Hall Id']} //{diningHall['Dining Hall Id']}
         waitTime={diningHall['Wait Time']} //{diningHall['Wait Time']}
         diningHallId={diningHall['Dining Hall Id']} //{diningHall['Dining Hall Id']}
-        featuredItems={['Cajun Chicken', 'Roasted Broccoli']} //{diningHall['Featured Items']}
-        stars={4.3}
+        featuredItems={['Cajun Chicken', 'Roasted Broccoli', 'Pepperoni Pizza']} //{diningHall['Featured Items']}
+        stars={4.3} //{diningHall['Stars']}
+
         imageLink={imageDict[diningHall['Dining Hall Id']]} //{diningHall['Image Link']}
         diningData={data}
         loading={loading}
       />
     );
   });
+
+  const [isOpen, toggleOpen] = useState(false);
+
+  const openModal = (event) => {
+    toggleOpen(!isOpen);
+  };
   
   return (
     <>
-      
       {cards}
       <header>
         <div className="newbar">
@@ -49,17 +55,15 @@ export const HomePage = () => {
             <button className="sortby">
               Sort By <i className="fas fa-arrow-down"></i>
             </button>
-            {/* <div className="menu">
-              <a href="#"> ...</a>
-            </div> */}
           </div>
         </div>
       </header>
-      {/* <Form /> */}
-      {/* <Menu open={true} loading={loading} data={data}/> */}
-      <div className="footer"><button className='share' > Share your experience!</button></div>
-      {/* <Menu open={isOpen} loading={loading} data={diningData} diningHallId={diningHallId} toggleModal={openModal}/> */}
-      {/* <footer> space </footer> */}
+      <div className="footer">
+        <button className="share" onClick={openModal}>
+          Share your experience!
+        </button>
+      </div>
+      <Form open={isOpen} onClose={openModal} toggleModal={openModal} />
     </>
   );
 };
