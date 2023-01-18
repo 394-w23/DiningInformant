@@ -4,7 +4,6 @@ import { Form } from '../components/Form';
 import { getWaitTimes, streamWaitTimes, useDbData } from '../utils/firebase';
 import { getLatestWaitTimeForHalls, useDiningHallData, getLatestRatings } from '../utils/helpers';
 import { Menu } from '../components/Menu';
-import {useDbData} from '../utils/firebase';
 
 const imageDict = {
   Allison:
