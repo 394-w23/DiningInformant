@@ -5,6 +5,7 @@ import { getWaitTimes, streamWaitTimes, useDbData } from '../utils/firebase';
 import { getLatestWaitTimeForHalls, useDiningHallData, getLatestRatings } from '../utils/helpers';
 import { Menu } from '../components/Menu';
 
+
 const imageDict = {
   Allison:
     'https://wbo.com/wp-content/uploads/2019/10/Allison-Dining-Hall-sating-and-food-service-1500x1000.png',
