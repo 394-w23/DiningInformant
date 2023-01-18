@@ -6,6 +6,7 @@ import './styles/styles.css';
 import './styles/DiningCard.css';
 import './styles/Form.css';
 import './styles/HomePage.css';
+import './styles/Menu.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

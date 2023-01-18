@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { DiningCard } from '../components/DiningCard';
 import { Form } from '../components/Form';
+import { getWaitTimes, streamWaitTimes, useDbData } from '../utils/firebase';
+import { getLatestWaitTimeForHalls, useDiningHallData, getLatestRatings } from '../utils/helpers';
+import { Menu } from '../components/Menu';
 import {useDbData} from '../utils/firebase';
-import { getLatestWaitTimeForHalls, getLatestRatings } from '../utils/helpers';
 
 const imageDict = {
   Allison:
@@ -16,9 +18,8 @@ const imageDict = {
 };
 
 export const HomePage = () => {
+  const [data, loading, menuError] = useDiningHallData();
   const [waitTimes, waitTimesError, ratings, ratingsError] = useDbData();
-
-  console.log(ratings);
 
   const cards = waitTimes.map((diningHall) => {
     return (
@@ -29,29 +30,36 @@ export const HomePage = () => {
         featuredItems={['Cajun Chicken', 'Roasted Broccoli']} //{diningHall['Featured Items']}
         stars={4.3}
         imageLink={imageDict[diningHall['Dining Hall Id']]} //{diningHall['Image Link']}
+        diningData={data}
+        loading={loading}
       />
     );
   });
   
   return (
     <>
+      
+      {cards}
       <header>
-        <section className="newbar">
+        <div className="newbar">
           <div className="newleft">
             <h2>DiningInformant</h2>
           </div>
           <div className="topright">
-            <div className="sortby">
-              <h1>sortby</h1>
-            </div>
+            <button className="sortby">
+              Sort By <i className="fas fa-arrow-down"></i>
+            </button>
             {/* <div className="menu">
               <a href="#"> ...</a>
             </div> */}
           </div>
-        </section>
+        </div>
       </header>
-      {cards}
-      <Form />
+      {/* <Form /> */}
+      {/* <Menu open={true} loading={loading} data={data}/> */}
+      <div className="footer"><button className='share' > Share your experience!</button></div>
+      {/* <Menu open={isOpen} loading={loading} data={diningData} diningHallId={diningHallId} toggleModal={openModal}/> */}
+      {/* <footer> space </footer> */}
     </>
   );
 };
