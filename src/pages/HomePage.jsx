@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { DiningCard } from '../components/DiningCard';
 import { Form } from '../components/Form';
 import { getWaitTimes, streamWaitTimes, useDbData } from '../utils/firebase';
-import { getLatestWaitTimeForHalls, useDiningHallData } from '../utils/helpers';
+import { getLatestWaitTimeForHalls, useDiningHallData, getLatestRatings } from '../utils/helpers';
+import { Menu } from '../components/Menu';
+import {useDbData} from '../utils/firebase';
 
 const imageDict = {
   Allison:
@@ -16,11 +18,8 @@ const imageDict = {
 };
 
 export const HomePage = () => {
-  const [waitTimes, error] = useDbData();
   const [data, loading, menuError] = useDiningHallData();
-
-  // console.log(loading)
-  // console.log(data)
+  const [waitTimes, waitTimesError, ratings, ratingsError] = useDbData();
 
   const cards = waitTimes.map((diningHall) => {
     return (
@@ -30,6 +29,7 @@ export const HomePage = () => {
         diningHallId={diningHall['Dining Hall Id']} //{diningHall['Dining Hall Id']}
         featuredItems={['Cajun Chicken', 'Roasted Broccoli', 'Pepperoni Pizza']} //{diningHall['Featured Items']}
         stars={4.3} //{diningHall['Stars']}
+
         imageLink={imageDict[diningHall['Dining Hall Id']]} //{diningHall['Image Link']}
         diningData={data}
         loading={loading}
@@ -42,7 +42,7 @@ export const HomePage = () => {
   const openModal = (event) => {
     toggleOpen(!isOpen);
   };
-
+  
   return (
     <>
       {cards}
