@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Rating from '@mui/material/Rating';
 import { Menu } from './Menu';
+import { CircularProgress } from '@mui/material';
 
 export const DiningCard = (props) => {
-  const { waitTime, diningHallId, featuredItems, stars, imageLink, diningData, loading } = props;
+  const { waitTime, diningHallId, stars, imageLink, diningData, loading } = props;
 
   const [isOpen, toggleOpen] = useState(false);
 
-  const openModal = (event) => {
+  const featuredItems = diningData ? diningData[diningHallId][2][0]['items'].slice(0, 3) : [];
+
+  const openModal = () => {
     toggleOpen(!isOpen);
   };
-
 
   let color;
   if (waitTime < 10) {
@@ -36,21 +38,31 @@ export const DiningCard = (props) => {
               <h1> Featured Items: </h1>
             </div>
             <div className="featureditemslist">
-              <div className="item">{featuredItems[0]}</div>
-              <div className="item">{featuredItems[1]}</div>
-              <div className="item">{featuredItems[2]}</div>
+              {loading ? <CircularProgress /> : null}
+              {featuredItems.map((item) => {
+                const { name } = item;
+                return (
+                  <div key={name} className="item">
+                    {name}
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className="waitscore">
-            <Rating name="half-rating-read" defaultValue={3} value={stars} precision={0.5} readOnly sx={{fontSize: "2vw"}} />
+            <Rating
+              name="half-rating-read"
+              defaultValue={3}
+              value={stars}
+              precision={0.5}
+              readOnly
+              sx={{ fontSize: '2vw' }}
+            />
           </div>
         </div>
         <div className="middleright">
-
           <div className="waitlabel" style={{ backgroundColor: color }}>
-            <div className="waittime">
-              {`${waitTime} `}
-            </div>
+            <div className="waittime">{`${waitTime} `}</div>
             min
           </div>
           <div className="more">
@@ -58,7 +70,13 @@ export const DiningCard = (props) => {
               More <i className="fas fa-arrow-right"></i>
             </button>
           </div>
-          <Menu open={isOpen} loading={loading} data={diningData} diningHallId={diningHallId} toggleModal={openModal}/>
+          <Menu
+            open={isOpen}
+            loading={loading}
+            data={diningData}
+            diningHallId={diningHallId}
+            toggleModal={openModal}
+          />
         </div>
       </div>
     </section>
