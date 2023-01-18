@@ -5,7 +5,6 @@ import { getWaitTimes, streamWaitTimes, useDbData } from '../utils/firebase';
 import { getLatestWaitTimeForHalls, useDiningHallData, getLatestRatings } from '../utils/helpers';
 import { Menu } from '../components/Menu';
 
-
 const imageDict = {
   Allison:
     'https://wbo.com/wp-content/uploads/2019/10/Allison-Dining-Hall-sating-and-food-service-1500x1000.png',
@@ -30,7 +29,6 @@ export const HomePage = () => {
         diningHallId={diningHall['Dining Hall Id']} //{diningHall['Dining Hall Id']}
         featuredItems={['Cajun Chicken', 'Roasted Broccoli', 'Pepperoni Pizza']} //{diningHall['Featured Items']}
         stars={ratings ? ratings[diningHall['Dining Hall Id']] : 0} //{diningHall['Stars']}
-
         imageLink={imageDict[diningHall['Dining Hall Id']]} //{diningHall['Image Link']}
         diningData={data}
         loading={loading}
@@ -43,10 +41,10 @@ export const HomePage = () => {
   const openModal = (event) => {
     toggleOpen(!isOpen);
   };
-  
+
   return (
     <>
-      {cards}
+      <section className="cardsWrapper">{cards}</section>
       <header>
         <div className="newbar">
           <div className="newleft">
