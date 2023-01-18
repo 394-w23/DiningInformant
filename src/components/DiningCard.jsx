@@ -66,7 +66,7 @@ export const DiningCard = (props) => {
           </div>
           <div className="more">
             <button className="morebutton" onClick={openModal}>
-              More <i className="fas fa-arrow-right"></i>
+              Menu for today <i className="fas fa-arrow-right"></i>
             </button>
           </div>
           <Menu
