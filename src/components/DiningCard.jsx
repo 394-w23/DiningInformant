@@ -8,7 +8,18 @@ export const DiningCard = (props) => {
 
   const [isOpen, toggleOpen] = useState(false);
 
-  const featuredItems = diningData ? diningData[diningHallId][2][0]['items'].slice(0, 3) : [];
+  var meal = 0;
+  const date = new Date();
+  const hour = date.getHours();
+  if(hour < 11) {
+    meal = 0;
+  } else if(hour < 16) {
+    meal = 1;
+  } else {
+    meal = 2;
+  }
+  
+  const featuredItems = diningData ? diningData[diningHallId][meal][0]['items'].slice(0, 3) : [];
 
   const openModal = () => {
     toggleOpen(!isOpen);
