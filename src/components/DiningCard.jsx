@@ -6,6 +6,8 @@ import { CircularProgress } from '@mui/material';
 export const DiningCard = (props) => {
   const { waitTime, diningHallId, stars, imageLink, diningData, loading } = props;
 
+  const mealName = ['Breakfast','Lunch','Dinner'];
+
   const [isOpen, toggleOpen] = useState(false);
 
   var meal = 0;
@@ -46,7 +48,7 @@ export const DiningCard = (props) => {
         <div className="middleleft">
           <div className="featureditems">
             <div className="featuredlabel">
-              <h1> Featured Items: </h1>
+              <h1>{mealName[meal]} Preview:</h1>
             </div>
             <div className="featureditemslist">
               {loading ? <CircularProgress /> : null}
@@ -77,7 +79,7 @@ export const DiningCard = (props) => {
           </div>
           <div className="more">
             <button className="morebutton" onClick={openModal}>
-              Menu for today <i className="fas fa-arrow-right"></i>
+              Full menu<i className="fas fa-arrow-right"></i>
             </button>
           </div>
           <Menu

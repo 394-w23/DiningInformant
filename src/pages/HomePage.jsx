@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { DiningCard } from '../components/DiningCard';
 import { Form } from '../components/Form';
 import { getWaitTimes, streamWaitTimes, useDbData } from '../utils/firebase';
-import { getLatestWaitTimeForHalls, useDiningHallData, getLatestRatings } from '../utils/helpers';
+import { useDiningHallData } from '../utils/helpers';
 import { Menu } from '../components/Menu';
 
 const imageDict = {

@@ -1,37 +1,171 @@
 import React, { useEffect, useState } from 'react';
 
-export const getLatestWaitTimeForHalls = (diningHalls) => {
-  var seenHalls = new Set();
+
+/*
+{
+  "Dining Hall Id": string,
+  Timestamp: Date,
+  "Wait Time": number,
+}
+*/
+export const getAverageWaitTimeForHalls = (diningHalls) => {
   var result = [];
-
-  diningHalls.reverse();
-
+  const date = new Date();
+  var hallTimes = {
+    "Sargent": 0,
+    "Plex West": 0,
+    "Elder": 0,
+    "Allison": 0,
+  }
+  var hallCounts = {
+    "Sargent": 0,
+    "Plex West": 0,
+    "Elder": 0,
+    "Allison": 0,
+  }
+  var hallAverageTimes = {
+    "Sargent": 5,
+    "Plex West": 5,
+    "Elder": 5,
+    "Allison": 5,
+  }
+  
   diningHalls.forEach((diningHall) => {
     const id = diningHall['Dining Hall Id'];
-    if (!seenHalls.has(id) && result.length < 4) {
-      result.push(diningHall);
-      seenHalls.add(id);
+    const timestamp = diningHall['Timestamp'];
+    const waitTime = diningHall['Wait Time'];
+    console.log(timestamp.seconds);
+    console.log({date});
+    const secondsSinceEpoch = Math.round(date.getTime() / 1000);
+    console.log({secondsSinceEpoch});
+    if(secondsSinceEpoch - timestamp.seconds < 3600) {
+      console.log("working");
+      hallTimes[id] += waitTime;
+      hallCounts[id] += 1;
     }
+    
+  
+    // if (!seenHalls.has(id) && result.length < 4) {
+    //   result.push(diningHall);
+    //   seenHalls.add(id);
+    // }
   });
+
+  for (const hall in hallAverageTimes) {
+    console.log("here");
+    if (hallCounts[hall] > 0){
+      hallAverageTimes[hall] = Math.round(hallTimes[hall] / hallCounts[hall]);
+      console.log("also here");
+    }
+    result.push({
+      "Dining Hall Id": hall,
+      'Wait Time': hallAverageTimes[hall],
+    })
+  }
 
   return result;
 };
 
+function getMealFromHour(hour) {
+  var meal = 0;
+  if(hour < 11) {
+    meal = 0;
+  } else if(hour < 16) {
+    meal = 1;
+  } else {
+    meal = 2;
+  }
+  return meal;
+}
+
 //will change into an average ratings function, takes the ratings for a certain dining halls for last 15 minutes
-export const getLatestRatings = (diningHalls) => {
+export const getAverageRatings = (diningHalls) => {
   var seenHalls = new Set();
   var result = {};
   diningHalls.reverse();
 
+  var hallStars = {
+    "Sargent": 0,
+    "Plex West": 0,
+    "Elder": 0,
+    "Allison": 0,
+  }
+  var hallCounts = {
+    "Sargent": 0,
+    "Plex West": 0,
+    "Elder": 0,
+    "Allison": 0,
+  }
+  var hallAverageStars = {
+    "Sargent": 3,
+    "Plex West": 3,
+    "Elder": 3,
+    "Allison": 3,
+  }
+
+  /*
+  Checking what meal it is
+
+  if(waitTimeHour < 11){
+    //breakfast
+  } else if(waitTimeHour < 16) {
+    //lunch
+  } else {
+    //dinner
+  }
+  */
+
+  /* 
+    Get date object from epoch seconds -- stackoverflow
+    var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+    d.setUTCSeconds(utcSeconds);
+
+    d.getHours();
+    */
+
   diningHalls.forEach((diningHall) => {
     const id = diningHall['Dining Hall Id'];
-    if (!seenHalls.has(id) && seenHalls.size < 4) {
-      result[id] = Number(diningHall['Stars'])
-      seenHalls.add(id);
+    const waitTime = diningHall['Wait Time'];
+    const timestamp = diningHall['Timestamp']
+    const stars = Number(diningHall['Stars']);
+
+    //find out what meal it is
+    const date = new Date();
+    const hour = date.getHours();
+    const secondsSinceEpoch = Math.round(date.getTime() / 1000);
+    const currentMeal = getMealFromHour(hour);
+
+    //count stars for that meal
+
+    
+    var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+    d.setUTCSeconds(timestamp.seconds);
+
+    if(d.getDate() == date.getDate()) {
+      if(getMealFromHour(d.getHours())==currentMeal) {
+        hallStars[id] += stars;
+        hallCounts[id] += 1;
+      }
     }
+
+    // if(secondsSinceEpoch - timestamp.seconds < 3600) {
+      
+    //   hallStars[id] += stars;
+    //   hallCounts[id] += 1;
+    // }
   });
 
-  return result;
+  for (const hall in hallAverageStars) {
+    if (hallCounts[hall] > 0){
+      hallAverageStars[hall] = hallStars[hall] / hallCounts[hall];
+    }
+    // result.push({
+    //   "Dining Hall Id": hall,
+    //   'Stars': hallAverageStars[hall],
+    // })
+  }
+
+  return hallAverageStars;
 };
 
 /*

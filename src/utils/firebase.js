@@ -10,7 +10,7 @@ import {
   query,
   onSnapshot
 } from 'firebase/firestore';
-import { getLatestRatings, getLatestWaitTimeForHalls } from './helpers';
+import { getAverageRatings, getAverageWaitTimeForHalls } from './helpers';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDrtj71l3VbmET1bKGtekAsifVzRlUmgHU',
@@ -85,7 +85,7 @@ export const useDbData = () => {
     const unsubscribe = streamWaitTimes(
       (querySnapshot) => {
         const updatedWaitTimes = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
-        const latestWaitTimes = getLatestWaitTimeForHalls(updatedWaitTimes);
+        const latestWaitTimes = getAverageWaitTimeForHalls(updatedWaitTimes);
         setWaitTimeData(latestWaitTimes);
       },
       () => setWaitTimeError('Failed to get wait times')
@@ -100,7 +100,7 @@ export const useDbData = () => {
     const unsubscribe = streamRatings(
       (querySnapshot) => {
         const updatedRatings = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
-        const latestRatings = getLatestRatings(updatedRatings);
+        const latestRatings = getAverageRatings(updatedRatings);
         setRatingData(latestRatings);
       },
       () => setRatingError('Failed to get ratings')
