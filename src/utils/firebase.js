@@ -3,14 +3,12 @@ import { initializeApp } from 'firebase/app';
 import {
   getFirestore,
   collection,
-  getDocs,
   Timestamp,
   addDoc,
   orderBy,
   query,
   onSnapshot
 } from 'firebase/firestore';
-import { getAverageRatings, getAverageWaitTimeForHalls } from './helpers';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDrtj71l3VbmET1bKGtekAsifVzRlUmgHU',
@@ -25,38 +23,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
-// console.log(db);
-export async function getWaitTimes() {
-  const waitTimes = collection(db, 'Waiting Times');
-  const waitQuery = await query(waitTimes, orderBy('Timestamp', 'asc'));
-  const waitSnapshot = await getDocs(waitQuery);
-  // console.log({waitSnapshot})
-  const waitList = waitSnapshot.docs.map((doc) => doc.data());
-  return waitList;
-}
-
-export async function getDiningHallInfo() {
-  const diningData = collection(db, 'Dining Halls');
-  const diningSnapshot = await getDocs(diningData);
-  // console.log({waitSnapshot})
-  const diningList = diningSnapshot.docs.map((doc) => doc.data());
-  // console.log({diningList})
-  return diningList;
-}
-
-
-export const streamWaitTimes = (snapshot, error) => {
-  const itemsColRef = collection(db, 'Waiting Times');
-  const waitQuery = query(itemsColRef, orderBy('Timestamp', 'asc'));
-  return onSnapshot(waitQuery, snapshot, error);
-};
-
-export const streamRatings = (snapshot, error) =>{
-  const itemsColRef = collection(db, 'Ratings');
-  const ratingQuery = query(itemsColRef, orderBy('Timestamp', 'asc'));
-  return onSnapshot(ratingQuery, snapshot, error);
-}
 
 export async function submitForm(diningHallId, waitTime, rating) {
   try {
@@ -77,36 +43,30 @@ export async function submitForm(diningHallId, waitTime, rating) {
   return 0;
 }
 
-export const useDbData = () => {
-  const [waitTimeData, setWaitTimeData] = useState([]);
-  const [waitTimeError, setWaitTimeError] = useState(null);
+export const useDbData = (collectionName, parsingFn) => {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = streamWaitTimes(
+    const itemsColRef = collection(db, collectionName);
+    const dataQuery = query(itemsColRef, orderBy('Timestamp', 'asc'));
+
+    const unsubscribe = onSnapshot(
+      dataQuery,
       (querySnapshot) => {
-        const updatedWaitTimes = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
-        const latestWaitTimes = getAverageWaitTimeForHalls(updatedWaitTimes);
-        setWaitTimeData(latestWaitTimes);
+        const updatedData = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+        const parsedData = parsingFn(updatedData);
+        setData(parsedData);
+        setLoading(false);
       },
-      () => setWaitTimeError('Failed to get wait times')
+      () => {
+        setLoading(false);
+        setError('Failed to get wait times');
+      }
     );
     return unsubscribe;
   }, []);
 
-  const [ratingData, setRatingData] = useState([]);
-  const [ratingError, setRatingError] = useState(null);
-
-  useEffect(() => {
-    const unsubscribe = streamRatings(
-      (querySnapshot) => {
-        const updatedRatings = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
-        const latestRatings = getAverageRatings(updatedRatings);
-        setRatingData(latestRatings);
-      },
-      () => setRatingError('Failed to get ratings')
-    );
-    return unsubscribe;
-  }, []);
-
-  return [waitTimeData, waitTimeError, ratingData, ratingError];
+  return [data, error, loading];
 };

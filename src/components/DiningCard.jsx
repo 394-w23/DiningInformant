@@ -10,15 +10,18 @@ export const DiningCard = (props) => {
 
   const [isOpen, toggleOpen] = useState(false);
 
-  var meal = 0;
+  let meal;
   const date = new Date();
   const hour = date.getHours();
   if(hour < 11) {
-    meal = 0;
+    // meal = 0;
+    meal = 'breakfast';
   } else if(hour < 16) {
-    meal = 1;
+    // meal = 1;
+    meal = 'lunch';
   } else {
-    meal = 2;
+    // meal = 2;
+    meal = 'dinner';
   }
   
   const featuredItems = diningData ? diningData[diningHallId][meal][0]['items'].slice(0, 3) : [];

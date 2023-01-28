@@ -34,12 +34,12 @@ export const getAverageWaitTimeForHalls = (diningHalls) => {
     const id = diningHall['Dining Hall Id'];
     const timestamp = diningHall['Timestamp'];
     const waitTime = diningHall['Wait Time'];
-    console.log(timestamp.seconds);
-    console.log({date});
+    // console.log(timestamp.seconds);
+    // console.log({date});
     const secondsSinceEpoch = Math.round(date.getTime() / 1000);
-    console.log({secondsSinceEpoch});
+    // console.log({secondsSinceEpoch});
     if(secondsSinceEpoch - timestamp.seconds < 3600) {
-      console.log("working");
+      // console.log("working");
       hallTimes[id] += waitTime;
       hallCounts[id] += 1;
     }
@@ -52,10 +52,10 @@ export const getAverageWaitTimeForHalls = (diningHalls) => {
   });
 
   for (const hall in hallAverageTimes) {
-    console.log("here");
+    // console.log("here");
     if (hallCounts[hall] > 0){
       hallAverageTimes[hall] = Math.round(hallTimes[hall] / hallCounts[hall]);
-      console.log("also here");
+      // console.log("also here");
     }
     result.push({
       "Dining Hall Id": hall,
@@ -176,6 +176,13 @@ return type
   ...
 }
 */
+export const menusToDictionary = (halls) => {
+  const menus = {};
+  halls.forEach((hall) => {
+    menus[hall['Dining Hall Id']] = hall['menu'];
+  });
+  return menus;
+};
 
 const getMenu = (menuObj) => {
   return menuObj['menu']['periods']['categories'];

@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { DiningCard } from '../components/DiningCard';
 import { Form } from '../components/Form';
-import { getWaitTimes, streamWaitTimes, useDbData } from '../utils/firebase';
-import { useDiningHallData } from '../utils/helpers';
-import { Menu } from '../components/Menu';
+import { useDbData } from '../utils/firebase';
+import { getAverageRatings, getAverageWaitTimeForHalls, menusToDictionary, useDiningHallData } from '../utils/helpers';
 
 const imageDict = {
   Allison:
@@ -17,8 +16,10 @@ const imageDict = {
 };
 
 export const HomePage = () => {
-  const [data, loading, menuError] = useDiningHallData();
-  const [waitTimes, waitTimesError, ratings, ratingsError] = useDbData();
+  // const [data, loading, menuError] = useDiningHallData();
+  const [waitTimes, waitTimesError] = useDbData('Waiting Times', getAverageWaitTimeForHalls);
+  const [ratings, ratingsError] = useDbData('Ratings', getAverageRatings);
+  const [menus, menusError, loading] = useDbData('Dining Halls', menusToDictionary);
 
   const cards = waitTimes.map((diningHall) => {
     // console.log(ratings[diningHall['Dining Hall Id']]);
@@ -30,7 +31,7 @@ export const HomePage = () => {
         featuredItems={['Cajun Chicken', 'Roasted Broccoli', 'Pepperoni Pizza']} //{diningHall['Featured Items']}
         stars={ratings ? ratings[diningHall['Dining Hall Id']] : 0} //{diningHall['Stars']}
         imageLink={imageDict[diningHall['Dining Hall Id']]} //{diningHall['Image Link']}
-        diningData={data}
+        diningData={menus}
         loading={loading}
       />
     );

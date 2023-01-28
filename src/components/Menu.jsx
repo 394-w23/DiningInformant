@@ -40,7 +40,8 @@ export const Menu = (props) => {
   if (!loading) {
     // console.log(data);
     // console.log(data['Sargent']);
-    menuItems = data[diningHallId][tabSelected].map((category) => {
+    // menuItems = data[diningHallId][tabSelected].map((category) => {
+    menuItems = data[diningHallId][tabs[tabSelected].toLowerCase()].map((category) => {
       const { name, items } = category;
 
       return (
