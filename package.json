@@ -11,7 +11,10 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-    "cy:open": "cypress open --e2e"
+    "cy:open": "cypress open --e2e",
+    "em:start": "firebase emulators:start --import=./saved-data --export-on-exit",
+    "em:exec": "firebase emulators:exec --import=./saved-data 'npm start'",
+    "em:execui": "firebase emulators:exec --ui --import=./saved-data 'npm start'"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
