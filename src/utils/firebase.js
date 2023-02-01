@@ -7,7 +7,8 @@ import {
   addDoc,
   orderBy,
   query,
-  onSnapshot
+  onSnapshot,
+  connectFirestoreEmulator
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -23,6 +24,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+if (!window.EMULATION && import.meta.env.NODE_ENV !== 'production') {
+  connectFirestoreEmulator(db, '127.0.0.1', 8080);
+}
 
 export async function submitForm(diningHallId, waitTime, rating) {
   try {
