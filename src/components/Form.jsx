@@ -46,7 +46,7 @@ export const Form = (props) => {
               <h1 className="shareYourExperienceH1">Share Your Experience!</h1>
             </div>
             <div className="question">
-              <h1 className="questionH1">Which dining hall did you go to?</h1>
+              <h1 className="questionH1" data-cy="dining-hall-question">Which dining hall did you go to?</h1>
             </div>
             <div className="response">
               <Select

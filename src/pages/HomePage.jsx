@@ -59,7 +59,7 @@ export const HomePage = () => {
         </div>
       </header>
       <div className="footer">
-        <button className="share" onClick={openModal}>
+        <button className="share" onClick={openModal} data-cy="share-your-experience">
           Share your experience!
         </button>
       </div>
