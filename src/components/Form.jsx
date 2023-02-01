@@ -50,6 +50,7 @@ export const Form = (props) => {
             </div>
             <div className="response">
               <Select
+                data-cy = "dining-hall-dropdown"
                 sx={{
                   '& .MuiOutlinedInput-notchedOutline': {
                     border: 'none'
@@ -67,7 +68,7 @@ export const Form = (props) => {
                 value={diningHallId}
                 onChange={handleDiningHallChange}
                 id="diningHall">
-                <MenuItem value={'Allison'}>Allison</MenuItem>
+                <MenuItem data-cy = "click-on-allison" value={'Allison'}>Allison</MenuItem>
                 <MenuItem value={'Elder'}>Elder</MenuItem>
                 <MenuItem value={'Plex West'}>Plex West</MenuItem>
                 <MenuItem value={'Sargent'}>Sargent</MenuItem>
@@ -78,6 +79,7 @@ export const Form = (props) => {
             </div>
             <div className="response">
               <input
+              data-cy="wait-time-typing"
                 className="waittimeinput"
                 type="number"
                 min="0"
@@ -105,7 +107,8 @@ export const Form = (props) => {
               />
             </div>
             <div className="buttoncontainer">
-              <Button
+              <Button  
+                data-cy="submit-button"
                 sx={{ fontSize: '1.5em' }}
                 className="submitbutton"
                 onClick={handleSubmit}
