@@ -64,7 +64,7 @@ export const Menu = (props) => {
   }
 
   return (
-    <Modal style={{ margin: '20px 20px' }} open={open} onClose={toggleModal}>
+    <Modal style={{ margin: '20px 20px', zLayer: '1' }} open={open} onClose={toggleModal}>
       <Paper className="MenuPaper">
         <div
           style={{

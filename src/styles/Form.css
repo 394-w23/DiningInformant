@@ -1,5 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Inter:400,700,600);
 
+.modal {
+  margin: 85px 20px;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  overflow: scroll;
+  height: 100%;
+  display: block;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -64,7 +74,7 @@
 
 .buttoncontainer {
   margin-top: 5%;
-  margin-bottom: 2%;
+  margin-bottom: 5%;
   width: 100%;
 }
 
@@ -80,4 +90,14 @@
   max-height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge add Firefox */
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
 }

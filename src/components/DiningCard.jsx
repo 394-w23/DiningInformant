@@ -28,6 +28,11 @@ export const DiningCard = (props) => {
     toggleOpen(!isOpen);
   };
 
+  const handleButtonPress = (event) => {
+    event.preventDefault();
+    toggleOpen(true)
+  }
+
   let color;
   if (waitTime < 10) {
     color = '#79DE79';
@@ -38,7 +43,7 @@ export const DiningCard = (props) => {
   }
 
   return (
-    <section className="cards">
+    <section className="cards" onClick={handleButtonPress}>
       <div>
         <img className="hallpic" src={imageLink} alt={`Picture of ${diningHallId}`} />
         <div className="hallname">
@@ -69,7 +74,11 @@ export const DiningCard = (props) => {
               value={stars}
               precision={0.5}
               readOnly
-              sx={{ fontSize: '2vw' }}
+              sx={{ 
+                '& .MuiRating-icon': {
+                fontSize: '5vw'
+                } 
+              }}
             />
           </div>
         </div>
@@ -79,8 +88,8 @@ export const DiningCard = (props) => {
             min
           </div>
           <div className="more">
-            <button className="morebutton" onClick={openModal}>
-              Full menu<i className="fas fa-arrow-right"></i>
+            <button className="morebutton">
+              Full Menu <i className="fas fa-arrow-right"></i>
             </button>
           </div>
           <Menu

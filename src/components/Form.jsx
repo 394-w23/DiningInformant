@@ -35,7 +35,7 @@ export const Form = (props) => {
   };
 
   return (
-    <Modal style={{ margin: '85px 20px' }} open={open} onClose={onClose}>
+    <Modal className="modal scrollbar-hidden" open={open} onClose={onClose}>
       <>
         <IconButton sx={{ position: 'fixed', top: 10, right: 10 }} onClick={onClose}>
           <CloseIcon size="large" sx={{ color: 'white', fontSize: '50px' }} />
@@ -95,7 +95,7 @@ export const Form = (props) => {
               <Rating
                 sx={{
                   '& .MuiRating-icon': {
-                    fontSize: '3rem'
+                    fontSize: '10vw'
                   }
                 }}
                 name="half-rating-read"

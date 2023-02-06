@@ -3,6 +3,7 @@
   flex-direction: column;
   background-color: white;
   border-radius: 25px;
+  cursor: pointer;
 }
 
 .top {
@@ -12,7 +13,7 @@
 .hallname {
   font-family: 'Comfortaa', cursive;
   position: absolute;
-  font-size: 130%;
+  font-size: 120%;
   padding-left: 3%;
   font: bolder;
   max-height: 60px;
@@ -49,7 +50,7 @@
 .featuredlabel {
   font-weight: bolder;
   background: #4e2a84;
-  width: 55%;
+  width: 70%;
   border-radius: 25px;
   color: white;
   padding-left: 4%;
@@ -85,6 +86,7 @@
   background: green;
   text-align: center;
   margin: 10px;
+  margin-bottom: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,7 +100,7 @@
 }
 
 .waitscore {
-  padding-left: 3%;
+  padding-left: 5%;
   padding-right: 3%;
   font-weight: bolder;
 }
@@ -108,10 +110,10 @@
   justify-content: center;
   text-align: center;
   padding-right: 13%;
-  padding-top: 12%;
 }
 
 .morebutton {
+  font-size: 3vw;
   width: 65%;
   text-align: center;
   padding: 0;
@@ -128,11 +130,11 @@
   padding-left: 3%;
   padding-top: 1%;
 }
-
+/*
 .MuiRating-icon {
-  font-size: 2rem;
+  font-size: 2vw;
 }
-
+*/
 a {
   text-decoration: none;
   color: blue;
