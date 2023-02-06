@@ -24,13 +24,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-/*
+
 if (!window.EMULATION && import.meta.env.PROD !== true) {
   connectFirestoreEmulator(db, '127.0.0.1', 8080);
 
   window.EMULATION = true;
 }
-*/
+
 export async function submitForm(diningHallId, waitTime, rating) {
   try {
     const waitingTimesRef = await addDoc(collection(db, 'Waiting Times'), {
