@@ -78,7 +78,7 @@ export const Menu = (props) => {
             <CloseIcon size="large" sx={{ fontSize: '50px' }} />
           </IconButton>
         </div>
-        <ul className="MenuTabs">
+        <ul className="MenuTabs" data-cy="full-menu-tabs">
           {tabs.map((tab, index) => {
             return (
               <li
