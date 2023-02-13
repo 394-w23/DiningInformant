@@ -86,7 +86,7 @@ export const DiningCard = (props) => {
               min
             </div>
             <div className="more">
-              <button className="morebutton">
+              <button className="morebutton" data-cy={'menu-'+diningHallId}>
                 Full Menu <i className="fas fa-arrow-right"></i>
               </button>
             </div>

@@ -86,7 +86,8 @@ export const Menu = (props) => {
                 key={tab}
                 id={index}
                 onClick={handleTabButtonPush}
-                style={{ width: '33.3%' }}>
+                style={{ width: '33.3%' }}
+                data-cy={tabs[index]}>
                 {tab}
               </li>
             );
