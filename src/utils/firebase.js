@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import {
-  getFirestore,
+  initializeFirestore,
   collection,
   Timestamp,
   addDoc,
@@ -23,7 +23,9 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const db = initializeFirestore(app, {
+  experimentalForceLongPolling: true
+});
 
 if (!window.EMULATION && import.meta.env.PROD !== true) {
   connectFirestoreEmulator(db, '127.0.0.1', 8080);
@@ -40,7 +42,7 @@ export async function submitForm(diningHallId, waitTime, rating) {
     });
     const ratingsRef = await addDoc(collection(db, 'Ratings'), {
       'Dining Hall Id': diningHallId,
-      'Stars': rating,
+      Stars: rating,
       Timestamp: Timestamp.now()
     });
     console.log('Document written with ID: ', waitingTimesRef.id);
