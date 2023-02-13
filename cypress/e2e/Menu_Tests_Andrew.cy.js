@@ -4,10 +4,10 @@ describe('Menu Tests', () => {
 
     it('Share Menu Buttons Exist', () => {
         cy.visit('/');
-        cy.get('[data-cy=menu-Allison]').should('contain','Full menu');
-        cy.get('[data-cy=menu-Sargent]').should('contain','Full menu');
-        cy.get('[data-cy=menu-Plex-West]').should('contain','Full menu');
-        cy.get('[data-cy=menu-Elder]').should('contain','Full menu');
+        cy.get('[data-cy=menu-Allison]').should('contain','Full Menu');
+        cy.get('[data-cy=menu-Sargent]').should('contain','Full Menu');
+        cy.get("[data-cy=menu-Plex-West]").should('contain','Full Menu');
+        cy.get('[data-cy=menu-Elder]').should('contain','Full Menu');
     });
 
     it('Clicking share menu button opens menu modal', () => {
