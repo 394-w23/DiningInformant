@@ -1,28 +1,57 @@
 describe('Test App', () => {
 
     
-    it('when I update the waiting time for a certain dining hall, I should be able to see the average wait time', () => {
-       
+    it('submitting a value for waittime that is not the current avg changes waittime displayed', () => {
         cy.visit('/');
-        cy.get('#waittime').should('contain', '5');
-        cy.get('[data-cy=share-your-experience]').click();
-        cy.get('[data-cy=submit-button]').should('be.disabled');
-        cy.get("[data-cy=dining-hall-dropdown]").click();
-        cy.get("[data-cy=click-on-sargent]").click();
-        cy.get("[data-cy=wait-time-typing]").type("3");
-        cy.get("[data-cy=halfratingread]").click();
-        cy.get('[data-cy=submit-button]').click();
-        cy.visit('/');
-        cy.get('#waittime').should('not.contain', '5');
-        cy.get('[data-cy=share-your-experience]').click();
-        cy.get('[data-cy=submit-button]').should('be.disabled');
-        cy.get("[data-cy=dining-hall-dropdown]").click();
-        cy.get("[data-cy=click-on-sargent]").click();
-        cy.get("[data-cy=wait-time-typing]").type("7");
-        cy.get("[data-cy=halfratingread]").click();
-        cy.get('[data-cy=submit-button]').click();
-        cy.get('#waittime').should('contain', '5');
-   
+        cy.get('#waittime').then(($wt) => {
+            const txt = $wt.text()
+            if (txt == 120) {
+                cy.get('[data-cy=share-your-experience]').click();
+                cy.get('[data-cy=submit-button]').should('be.disabled');
+                cy.get("[data-cy=dining-hall-dropdown]").click();
+                cy.get("[data-cy=click-on-sargent]").click();
+                cy.get("[data-cy=wait-time-typing]").type("1");
+                // cy.get("[data-cy=wait-time-typing]").type(txt);
+                cy.get("[data-cy=halfratingread]").click();
+                cy.get('[data-cy=submit-button]').click();
+
+                cy.get('#waittime').should(($wt2) => {
+                    expect($wt2.text()).not.to.eq(txt)
+                });
+            }
+            else {
+                cy.get('[data-cy=share-your-experience]').click();
+                cy.get('[data-cy=submit-button]').should('be.disabled');
+                cy.get("[data-cy=dining-hall-dropdown]").click();
+                cy.get("[data-cy=click-on-sargent]").click();
+                cy.get("[data-cy=wait-time-typing]").type("1");
+                cy.get("[data-cy=wait-time-typing]").type(txt);
+                cy.get("[data-cy=halfratingread]").click();
+                cy.get('[data-cy=submit-button]').click();
+
+                cy.get('#waittime').should(($wt2) => {
+                    expect($wt2.text()).not.to.eq(txt)
+                });
+        }
+
+        });
+        cy.get('#waittime').then(($wt) => {
+            const txt = $wt.text()
+
+            cy.get('[data-cy=share-your-experience]').click();
+            cy.get('[data-cy=submit-button]').should('be.disabled');
+            cy.get("[data-cy=dining-hall-dropdown]").click();
+            cy.get("[data-cy=click-on-sargent]").click();
+            // cy.get("[data-cy=wait-time-typing]").type("1");
+            cy.get("[data-cy=wait-time-typing]").type(txt);
+            cy.get("[data-cy=halfratingread]").click();
+            cy.get('[data-cy=submit-button]').click();
+
+            cy.get('#waittime').should(($wt2) => {
+                expect($wt2.text()).to.eq(txt)
+            });
+
+        });
 });
 
     it('all four dining cards show', () => {
