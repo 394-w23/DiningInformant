@@ -54,7 +54,7 @@ export const Menu = (props) => {
 
             return (
               <div key={name}>
-                <Typography style={{ margin: '3px 1px 3px 25px' }}>{name}</Typography>
+                <Typography style={{ margin: '3px 1px 3px 25px' }} data-cy={name.replaceAll(' ','-')}>{name}</Typography>
               </div>
             );
           })}
