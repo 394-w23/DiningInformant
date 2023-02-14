@@ -23,6 +23,7 @@ export const Form = (props) => {
 
   const handleRatingChange = (event, newValue) => {
     setRating(newValue);
+    console.log(newValue);
   };
 
   const handleSubmit = (event) => {
@@ -71,7 +72,7 @@ export const Form = (props) => {
                 <MenuItem data-cy = "click-on-allison" value={'Allison'}>Allison</MenuItem>
                 <MenuItem value={'Elder'}>Elder</MenuItem>
                 <MenuItem value={'Plex West'}>Plex West</MenuItem>
-                <MenuItem value={'Sargent'}>Sargent</MenuItem>
+                <MenuItem data-cy = "click-on-sargent" value={'Sargent'}>Sargent</MenuItem>
               </Select>
             </div>
             <div className="question">
@@ -98,6 +99,7 @@ export const Form = (props) => {
                     fontSize: '10vw'
                   }
                 }}
+                data-cy="halfratingread"
                 name="half-rating-read"
                 precision={0.5}
                 size="large"
@@ -105,6 +107,7 @@ export const Form = (props) => {
                 value={rating}
                 onChange={handleRatingChange}
               />
+              
             </div>
             <div className="buttoncontainer">
               <Button  
@@ -126,6 +129,9 @@ export const Form = (props) => {
                 type="submit">
                 Submit!
               </Button>
+            </div>
+            <div>
+              word
             </div>
           </div>
         </Paper>

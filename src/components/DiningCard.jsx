@@ -39,6 +39,10 @@ export const DiningCard = (props) => {
     color = '#FB6962';
   }
 
+  if (diningHallId == "Allision") {
+    data.cy
+  }
+
   return (
     <>
       <section className="cards" onClick={openModal}>
@@ -82,7 +86,7 @@ export const DiningCard = (props) => {
           </div>
           <div className="middleright">
             <div className="waitlabel" style={{ backgroundColor: color }}>
-              <div className="waittime">{`${waitTime} `}</div>
+              <div id="waittime" className="waittime">{`${waitTime} `} </div>
               min
             </div>
             <div className="more">
