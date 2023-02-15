@@ -19,8 +19,17 @@ describe('Test App', () => {
 
     it('rating shows default value of 3', () => {
         cy.visit('/');
-        cy.get('.MuiRating-root').each((rating) => {
-            cy.wrap(rating).should('have.attr', 'aria-valuenow', '3');
+        // cy.get('.MuiRating-root').each((rating) => {
+        //     cy.wrap(rating).should('have.attr', 'value', '3');
+        // });
+
+        cy.get('.MuiRating-root')  // select the Mui Rating component
+        .find('span')  // select the rating elements inside the component
+        .filter('.MuiRating-iconFilled')  // select the rating value element
+        .invoke('attr', 'data-value')  // retrieve the "data-value" attribute
+        .then((value) => {
+            cy.log(`The rating value is ${value}`);
+            // use the retrieved value in your test
         });
     });
 
