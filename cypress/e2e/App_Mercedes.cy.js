@@ -17,4 +17,11 @@ describe('Test App', () => {
         cy.get('[data-cy=dining-hall-question]').should('contain', 'Which dining hall did you go to?');
     });
 
+    it('rating shows default value of 3', () => {
+        cy.visit('/');
+        cy.get('.MuiRating-root').each((rating) => {
+            cy.wrap(rating).should('have.attr', 'aria-valuenow', '3');
+        });
+    });
+
 });
