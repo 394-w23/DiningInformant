@@ -54,7 +54,11 @@ export const Menu = (props) => {
 
             return (
               <div key={name}>
-                <Typography style={{ margin: '3px 1px 3px 25px' }} data-cy={name.replaceAll(' ','-')}>{name}</Typography>
+                <Typography
+                  style={{ margin: '3px 1px 3px 25px' }}
+                  data-cy={name.replaceAll(' ', '-')}>
+                  {name}
+                </Typography>
               </div>
             );
           })}
@@ -65,7 +69,7 @@ export const Menu = (props) => {
 
   return (
     <Modal style={{ margin: '20px 20px', zLayer: '1' }} open={open} onClose={toggleModal}>
-      <Paper className="MenuPaper">
+      <Paper data-cy="modal" className="MenuPaper">
         <div
           style={{
             padding: '3px 15px 0px 15px',
