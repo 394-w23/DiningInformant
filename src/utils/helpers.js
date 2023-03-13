@@ -66,7 +66,7 @@ export const getAverageWaitTimeForHalls = (diningHalls) => {
   return result;
 };
 
-function getMealFromHour(hour) {
+export function getMealFromHour(hour) {
   var meal = 0;
   if(hour < 11) {
     meal = 0;
