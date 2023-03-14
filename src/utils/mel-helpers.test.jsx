@@ -3,19 +3,6 @@ import { getMealFromHour, getAverageWaitTimeForHalls, getAverageRatings } from '
 
 describe('All dining halls default rating is 3', () => {
     test('If no ratings, getAverageRatings returns a rating of 3 for each dining hall', () => {
-                var result = getAverageRatings([]);
-                console.log(result);
-                expect(result['Sargent']);
-                expect(result['Allison']);
-                expect(result['Plex West']);
-                expect(result['Elder']);
-                
-            });
-}
-);
-
-describe('Star rating calculation test', () => {
-    test('If no ratings, getAverageRatings returns a rating of 3 for each dining hall', () => {
         var result = getAverageRatings([]);
         console.log(result);
         expect(result['Sargent']).toEqual(3);
@@ -24,6 +11,11 @@ describe('Star rating calculation test', () => {
         expect(result['Elder']).toEqual(3);
         
     });
+}
+);
+
+describe('Star rating calculation test', () => {
+    
     test('When only 1 rating is reported for each dining hall, getAverageRatings will return that rating', () => {
         const report = [{
             "Dining Hall Id": "Allison",
