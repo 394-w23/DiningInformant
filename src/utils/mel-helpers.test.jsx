@@ -7,26 +7,32 @@ describe('all dining halls in halls', () => {
         var allison = 0;
         var plex = 0;
         var elder = 0;
+        var other = 0;
         var result = getAverageWaitTimeForHalls([]);
         console.log(result);
         result.forEach((hall) => {
             if (hall['Dining Hall Id'] == 'Sargent' ){
                 sargent = 1;
             }
-            if (hall['Dining Hall Id'] == 'Elder' ){
+            else if (hall['Dining Hall Id'] == 'Elder' ){
                 elder = 1;
             }
-            if (hall['Dining Hall Id'] == 'Plex West' ){
+            else if (hall['Dining Hall Id'] == 'Plex West' ){
                 plex = 1;
             }
-            if (hall['Dining Hall Id'] == 'Allison' ){
+            else if (hall['Dining Hall Id'] == 'Allison' ){
                 allison = 1;
+            }
+            else {
+                other = 1;
             }
         })  
         expect(allison).toEqual(1);
         expect(plex).toEqual(1);
         expect(sargent).toEqual(1);
         expect(elder).toEqual(1);
+        expect(other).not.toEqual(1);
+
     });
 }
 );
@@ -109,5 +115,8 @@ describe('Wait time calculation test', () => {
         expect(result['Allison']).toEqual(4);
         expect(result['Plex West']).toEqual(3);
         expect(result['Elder']).toEqual(2);
+        expect(result['Sargent']).not.toEqual(3);
+        expect(result['Allison']).not.toEqual(3);
+        expect(result['Elder']).not.toEqual(3);
     });
 });
