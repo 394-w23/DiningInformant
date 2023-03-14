@@ -1,78 +1,113 @@
 import { describe, expect, test } from 'vitest';
-import { getMealFromHour, getAverageWaitTimeForHalls } from './helpers';
+import { getMealFromHour, getAverageWaitTimeForHalls, getAverageRatings } from './helpers';
 
-describe('Meal from hour test', () => {
-    test('Given an hour before 11, getMealFromHour should return 0 (breakfast)', () => {
-        //checking breakfast hours
-        for(var i = 0; i < 11; i++) {
-            expect(getMealFromHour(i)).toEqual(0);
-        }
+describe('all dining halls in halls', () => {
+    test('halls includes Sargent Allison Elder and Plex West', () => {
+        var sargent = 0;
+        var allison = 0;
+        var plex = 0;
+        var elder = 0;
+        var result = getAverageWaitTimeForHalls([]);
+        console.log(result);
+        result.forEach((hall) => {
+            if (hall['Dining Hall Id'] == 'Sargent' ){
+                sargent = 1;
+            }
+            if (hall['Dining Hall Id'] == 'Elder' ){
+                elder = 1;
+            }
+            if (hall['Dining Hall Id'] == 'Plex West' ){
+                plex = 1;
+            }
+            if (hall['Dining Hall Id'] == 'Allison' ){
+                allison = 1;
+            }
+        })  
+        expect(allison).toEqual(1);
+        expect(plex).toEqual(1);
+        expect(sargent).toEqual(1);
+        expect(elder).toEqual(1);
     });
-    test('Given an hour between 11 and 16(4pm), getMealFromHour should return 1 (lunch)', () => {
-        //checking lunch hours
-        for(var i = 11; i < 16; i++) {
-            expect(getMealFromHour(i)).toEqual(1);
-        }
-    });
-    test('Given an hour between 4pm and midnight, getMealFromHour should return 2 (dinner)', () => {
-        //checking dinner hours
-        for(var i = 16; i < 25; i++) {
-            expect(getMealFromHour(i)).toEqual(2);
-        }
-    });
-});
+}
+);
 
 describe('Wait time calculation test', () => {
-    test('If no wait times are reported, getAverageWaitTimeForHalls should default to 5 min wait for all halls', () => {
-        var result = getAverageWaitTimeForHalls([]);
+    test('If no ratings, getAverageRatings returns a rating of 3 for each dining hall', () => {
+        var result = getAverageRatings([]);
         console.log(result);
-        result.forEach((hall) => {
-            expect(hall['Wait Time']).toEqual(5);
-        })
+        expect(result['Sargent']).toEqual(3);
+        expect(result['Allison']).toEqual(3);
+        expect(result['Plex West']).toEqual(3);
+        expect(result['Elder']).toEqual(3);
+        
     });
-    test('For a single reported wait time, getAverageWaitTimesForHalls will return that reported time', () => {
+    test('When only 1 rating is reported for each dining hall, getAverageRatings will return that rating', () => {
         const report = [{
             "Dining Hall Id": "Allison",
             Timestamp: {nanoseconds: 0, seconds: Date.now()/1000},
-            "Wait Time": 14,
+            "Stars": 1,
+          },
+          {
+            "Dining Hall Id": "Elder",
+            Timestamp: {nanoseconds: 0, seconds: Date.now()/1000},
+            "Stars": 2,
+          },
+          {
+            "Dining Hall Id": "Plex West",
+            Timestamp: {nanoseconds: 0, seconds: Date.now()/1000},
+            "Stars": 4,
+          },
+          {
+            "Dining Hall Id": "Sargent",
+            Timestamp: {nanoseconds: 0, seconds: Date.now()/1000},
+            "Stars": 5,
           }];
-        var result = getAverageWaitTimeForHalls(report);
-        console.log(report);
-        result.forEach((hall) => {
-            if(hall['Dining Hall Id']=='Allison') {
-                expect(hall['Wait Time']).toEqual(14);
-            }
-        })
+        var result = getAverageRatings(report);
+        expect(result['Sargent']).toEqual(5);
+        expect(result['Allison']).toEqual(1);
+        expect(result['Plex West']).toEqual(4);
+        expect(result['Elder']).toEqual(2);
     });
-    test('If no wait times are reported, getAverageWaitTimeForHalls should default to 5 min wait for all halls', () => {
-        var result = getAverageWaitTimeForHalls([]);
-        console.log(result);
-        result.forEach((hall) => {
-            expect(hall['Wait Time']).toEqual(5);
-        })
-    });
-    test('For multiple reported wait times, getAverageWaitTimesForHalls will correctly average the wait times', () => {
+    test('For multiple reported ratings per dining hall, getAverageRatings will correctly average the ratings', () => {
         const report = [{
             "Dining Hall Id": "Allison",
             Timestamp: {nanoseconds: 0, seconds: Date.now()/1000},
-            "Wait Time": 15,
+            "Stars": 3,
           },
           {
             "Dining Hall Id": "Allison",
             Timestamp: {nanoseconds: 0, seconds: Date.now()/1000},
-            "Wait Time": 30,
+            "Stars": 4,
           },
           {
             "Dining Hall Id": "Allison",
             Timestamp: {nanoseconds: 0, seconds: Date.now()/1000},
-            "Wait Time": 24,
+            "Stars": 5,
+          },
+          {
+            "Dining Hall Id": "Elder",
+            Timestamp: {nanoseconds: 0, seconds: Date.now()/1000},
+            "Stars": 2,
+          },
+          {
+            "Dining Hall Id": "Elder",
+            Timestamp: {nanoseconds: 0, seconds: Date.now()/1000},
+            "Stars": 3,
+          },
+          {
+            "Dining Hall Id": "Elder",
+            Timestamp: {nanoseconds: 0, seconds: Date.now()/1000},
+            "Stars": 1,
+          },
+          {
+            "Dining Hall Id": "Sargent",
+            Timestamp: {nanoseconds: 0, seconds: Date.now()/1000},
+            "Stars": 5,
           }];
-        var result = getAverageWaitTimeForHalls(report);
-        console.log(report);
-        result.forEach((hall) => {
-            if(hall['Dining Hall Id']=='Allison') {
-                expect(hall['Wait Time']).toEqual(23);
-            }
-        })
+        var result = getAverageRatings(report);
+        expect(result['Sargent']).toEqual(5);
+        expect(result['Allison']).toEqual(4);
+        expect(result['Plex West']).toEqual(3);
+        expect(result['Elder']).toEqual(2);
     });
 });
