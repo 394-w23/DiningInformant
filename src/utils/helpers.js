@@ -184,7 +184,7 @@ export const menusToDictionary = (halls) => {
   return menus;
 };
 
-const getMenu = (menuObj) => {
+export const getMenu = (menuObj) => {
   return menuObj['menu']['periods']['categories'];
 }
 
